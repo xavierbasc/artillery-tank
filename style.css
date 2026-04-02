@@ -505,6 +505,8 @@ kbd {
 .mail-link { color: var(--accent); }
 .mail-link:hover { text-decoration: underline; }
 
+.author-name { color: var(--accent); font-style: normal; }
+
 @media (max-width: 480px) {
   .store-grid { grid-template-columns: 1fr; }
 }
@@ -518,8 +520,9 @@ kbd {
   display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
 }
 
-.footer-title { font-size: 0.8rem; color: var(--accent); }
-.footer-copy  { font-size: 0.5rem; color: var(--text-dim); }
+.footer-title  { font-size: 0.8rem; color: var(--accent); }
+.footer-copy   { font-size: 0.5rem; color: var(--text-dim); }
+.footer-author { font-size: 0.55rem; color: var(--text-dim); }
 
 .footer-links {
   display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;

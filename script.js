@@ -54,18 +54,18 @@
     const rand = (lo, hi) => { rng = lcg(rng); return lo + (rng / 0xFFFFFFFF) * (hi - lo); };
 
     const heights = new Int32Array(W).fill(0);
-    // Anclar a la zona baja: terreno ocupa el tercio inferior del canvas (360px)
-    heights[0]     = 265;
-    heights[W - 1] = 265;
+    // Terreno bajo: anchors en y=295 (cuarto inferior del canvas de 360px)
+    heights[0]     = 295;
+    heights[W - 1] = 295;
 
-    let scale = 48;  // poca variación para que el terreno no suba demasiado
+    let scale = 30;  // variación mínima para que el terreno se mantenga abajo
     for (let step = W - 1; step > 1; step >>= 1) {
       for (let x = 0; x < W - 1; x += step) {
         const mid = x + (step >> 1);
         if (mid >= W) continue;
         heights[mid] = ((heights[x] + heights[x + step]) >> 1) + rand(-scale, scale);
-        // Clamp: superficie entre y=215 y y=310 → deja ~215px de cielo libre
-        heights[mid] = Math.max(215, Math.min(310, heights[mid]));
+        // Clamp: y=265..320 → superficie en el cuarto inferior, ~265px de cielo
+        heights[mid] = Math.max(265, Math.min(320, heights[mid]));
       }
       scale *= 0.58;
     }
