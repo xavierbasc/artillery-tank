@@ -5,8 +5,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Permisos válidos para GITHUB_TOKEN en workflow YAML.
-# Nota: 'administration' NO es un permiso reconocido aquí — lo eliminamos.
 permissions:
   contents: read
   pages: write
@@ -27,20 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Habilita GitHub Pages con source=GitHub Actions si aún no está activo.
-      # La API devuelve 409 si ya existe — ignoramos ese error con || true.
-      - name: Enable GitHub Pages via API (first-time setup)
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh api repos/${{ github.repository }}/pages \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -f build_type=workflow \
-            --silent 2>/dev/null || true
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true   # crea el sitio Pages si no existe aún
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
