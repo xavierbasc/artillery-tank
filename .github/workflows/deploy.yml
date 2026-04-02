@@ -5,11 +5,13 @@ on:
     branches: [main]
   workflow_dispatch:          # permite lanzarlo manualmente desde la UI
 
-# Permisos mínimos necesarios para el deployment de Pages
+# pages: write + id-token: write → deploy
+# administration: write → configure-pages puede habilitar Pages automáticamente
 permissions:
   contents: read
   pages: write
   id-token: write
+  administration: write
 
 # Evita deployments paralelos; el que llegue segundo cancela el primero
 concurrency:
@@ -27,10 +29,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # configure-pages valida que Pages esté habilitado en el repo
-      # y inyecta la base_url correcta en el artefacto
+      # enablement: true → habilita Pages vía API si aún no lo está
+      # (requiere administration: write en los permisos del token)
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       # Sube el contenido del repo raíz como artefacto de Pages.
       # Como el sitio es HTML/CSS/JS puro no hay paso de build.
