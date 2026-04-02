@@ -5,6 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# NOTA: GitHub no permite que GITHUB_TOKEN cree el sitio Pages por primera vez.
+# Requisito previo (una sola vez):
+#   Settings → Pages → Source → "GitHub Actions"
+# Tras eso, cada push a main despliega automáticamente.
+
 permissions:
   contents: read
   pages: write
@@ -27,13 +32,11 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true   # crea el sitio Pages si no existe aún
 
-      - name: Upload artifact
+      - name: Upload static site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."
+          path: "."   # sube index.html, style.css, script.js desde la raíz
 
       - name: Deploy to GitHub Pages
         id: deployment
