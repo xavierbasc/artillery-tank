@@ -3,17 +3,15 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  workflow_dispatch:          # permite lanzarlo manualmente desde la UI
+  workflow_dispatch:
 
-# pages: write + id-token: write → deploy
-# administration: write → configure-pages puede habilitar Pages automáticamente
+# Permisos válidos para GITHUB_TOKEN en workflow YAML.
+# Nota: 'administration' NO es un permiso reconocido aquí — lo eliminamos.
 permissions:
   contents: read
   pages: write
   id-token: write
-  administration: write
 
-# Evita deployments paralelos; el que llegue segundo cancela el primero
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -29,15 +27,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # enablement: true → habilita Pages vía API si aún no lo está
-      # (requiere administration: write en los permisos del token)
+      # Habilita GitHub Pages con source=GitHub Actions si aún no está activo.
+      # La API devuelve 409 si ya existe — ignoramos ese error con || true.
+      - name: Enable GitHub Pages via API (first-time setup)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api repos/${{ github.repository }}/pages \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -f build_type=workflow \
+            --silent 2>/dev/null || true
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
-      # Sube el contenido del repo raíz como artefacto de Pages.
-      # Como el sitio es HTML/CSS/JS puro no hay paso de build.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
