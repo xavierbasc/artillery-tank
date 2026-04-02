@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Artillery Command</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ HERO ════════════════════════════════ -->
+<header class="hero">
+  <div class="scanlines"></div>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <nav class="nav">
+    <span class="nav-logo">PAC</span>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-to-play">How to Play</a></li>
+      <li><a href="#weapons">Weapons</a></li>
+      <li><a href="#tech">Tech</a></li>
+      <li><a href="https://github.com/xavierbasc/artillery-tank-app" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero-content">
+    <div class="pixel-tank" aria-hidden="true">
+      <div class="tank-barrel"></div>
+      <div class="tank-turret"></div>
+      <div class="tank-hull"></div>
+      <div class="tank-tracks"></div>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="title-pixel">PIXEL</span><br>
+      <span class="title-artillery">ARTILLERY</span><br>
+      <span class="title-command">COMMAND</span>
+    </h1>
+    <p class="hero-sub">Turn-based artillery warfare. Destructible terrain. Retro synthesis audio.</p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/xavierbasc/artillery-tank-app/releases" target="_blank" rel="noopener">
+        ⬇ Download
+      </a>
+      <a class="btn btn-secondary" href="https://github.com/xavierbasc/artillery-tank-app" target="_blank" rel="noopener">
+        ★ GitHub
+      </a>
+    </div>
+
+    <p class="platforms">
+      <span class="platform-badge win">Windows</span>
+      <span class="platform-badge mac">macOS</span>
+      <span class="platform-badge lin">Linux</span>
+      <span class="platform-badge ios">iOS</span>
+      <span class="platform-badge and">Android</span>
+    </p>
+  </div>
+
+  <div class="hero-preview">
+    <canvas id="demo" width="640" height="360" aria-label="Game preview"></canvas>
+    <span class="demo-label">Live Preview</span>
+  </div>
+
+  <div class="scroll-hint">▼ scroll</div>
+</header>
+
+<!-- ═══════════════════════════════ FEATURES ════════════════════════════════ -->
+<section id="features" class="section section-dark">
+  <h2 class="section-title">Features</h2>
+  <div class="features-grid">
+
+    <article class="feature-card">
+      <div class="feature-icon">💥</div>
+      <h3>Destructible Terrain</h3>
+      <p>Every shot reshapes the battlefield. Procedural Midpoint Displacement generates a unique landscape each round; explosions carve physically accurate circular craters in real time.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon">🎇</div>
+      <h3>Multi-layer Particles</h3>
+      <p>2 048-particle pool. Explosions render in three passes: additive white flash → orange shockwave ring → physics debris with gravity and friction → rising smoke plume.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon">🎵</div>
+      <h3>Retro Synth Audio</h3>
+      <p>Zero audio files. A real-time SDL3 callback synthesises every sound: a descending square-wave cannon shot and an exponentially-decaying white-noise explosion burst.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon">🌬</div>
+      <h3>Wind Physics</h3>
+      <p>Randomised wind force changes every turn and affects projectiles and smoke particles alike. Factor it in — or aim poorly and blame the weather.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon">🛒</div>
+      <h3>Shop & Economy</h3>
+      <p>Land hits to earn credits. Spend them between rounds on Nukes, Cluster Bombs, and Penetrators. Strategic shopping is the difference between victory and rubble.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3>Touch + Keyboard</h3>
+      <p>Left-half drag to aim, right-half drag to set power, centre-bottom tap to fire. The same binary runs identically on a phone and a desktop with SDL3 logical presentation.</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════ HOW TO PLAY ════════════════════════════════ -->
+<section id="how-to-play" class="section section-mid">
+  <h2 class="section-title">How to Play</h2>
+
+  <div class="controls-layout">
+    <div class="controls-col">
+      <h3 class="controls-heading">⌨ Keyboard (PC)</h3>
+      <table class="controls-table">
+        <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Adjust barrel angle</td></tr>
+        <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Adjust shot power</td></tr>
+        <tr><td><kbd>Space</kbd></td><td>Fire!</td></tr>
+        <tr><td><kbd>Tab</kbd></td><td>Cycle weapon</td></tr>
+        <tr><td><kbd>Enter</kbd></td><td>Confirm / buy in shop</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Close shop</td></tr>
+      </table>
+    </div>
+
+    <div class="controls-divider">VS</div>
+
+    <div class="controls-col">
+      <h3 class="controls-heading">👆 Touch (Mobile)</h3>
+      <table class="controls-table">
+        <tr><td>Drag left half</td><td>Adjust barrel angle</td></tr>
+        <tr><td>Drag right half</td><td>Adjust shot power</td></tr>
+        <tr><td>Tap FIRE button</td><td>Fire!</td></tr>
+        <tr><td>Tap weapon row</td><td>Buy in shop</td></tr>
+        <tr><td>Tap DONE</td><td>Close shop</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="turn-flow">
+    <div class="flow-step active-step">
+      <span class="step-num">1</span>
+      <span>Aim</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <span class="step-num">2</span>
+      <span>Fire</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <span class="step-num">3</span>
+      <span>Boom</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <span class="step-num">4</span>
+      <span>Shop</span>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <span class="step-num">5</span>
+      <span>Repeat</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ WEAPONS ══════════════════════════════════ -->
+<section id="weapons" class="section section-dark">
+  <h2 class="section-title">Arsenal</h2>
+  <div class="weapons-grid">
+
+    <div class="weapon-card" data-cost="FREE">
+      <div class="weapon-pixel shell-pixel"></div>
+      <h3>Shell</h3>
+      <div class="weapon-stat">
+        <span>Damage</span>
+        <div class="stat-bar"><div class="stat-fill" style="width:30%"></div></div>
+      </div>
+      <div class="weapon-stat">
+        <span>Radius</span>
+        <div class="stat-bar"><div class="stat-fill" style="width:32%"></div></div>
+      </div>
+      <p class="weapon-desc">Unlimited. Your bread and butter — reliable, free, and completely unremarkable.</p>
+    </div>
+
+    <div class="weapon-card" data-cost="5000 CR">
+      <div class="weapon-pixel nuke-pixel"></div>
+      <h3>Nuke</h3>
+      <div class="weapon-stat">
+        <span>Damage</span>
+        <div class="stat-bar"><div class="stat-fill" style="width:85%"></div></div>
+      </div>
+      <div class="weapon-stat">
+        <span>Radius</span>
+        <div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div>
+      </div>
+      <p class="weapon-desc">Screen-filling white flash. Obliterates a third of the map. Win the war, lose the landscape.</p>
+    </div>
+
+    <div class="weapon-card" data-cost="3000 CR">
+      <div class="weapon-pixel cluster-pixel"></div>
+      <h3>Cluster</h3>
+      <div class="weapon-stat">
+        <span>Damage</span>
+        <div class="stat-bar"><div class="stat-fill" style="width:20%"></div></div>
+      </div>
+      <div class="weapon-stat">
+        <span>Radius</span>
+        <div class="stat-bar"><div class="stat-fill" style="width:15%"></div></div>
+      </div>
+      <p class="weapon-desc">Splits into 6 sub-shells mid-flight. Excellent area denial; terrible for precision.</p>
+    </div>
+
+    <div class="weapon-card" data-cost="2000 CR">
+      <div class="weapon-pixel penetrator-pixel"></div>
+      <h3>Penetrator</h3>
+      <div class="weapon-stat">
+        <span>Damage</span>
+        <div class="stat-bar"><div class="stat-fill" style="width:50%"></div></div>
+      </div>
+      <div class="weapon-stat">
+        <span>Radius</span>
+        <div class="stat-bar"><div class="stat-fill" style="width:27%"></div></div>
+      </div>
+      <p class="weapon-desc">Burrows 18 px underground before detonating. Defeats terrain-hugging cowards.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TECH ════════════════════════════════════ -->
+<section id="tech" class="section section-mid">
+  <h2 class="section-title">Under the Hood</h2>
+  <div class="tech-grid">
+
+    <div class="tech-item">
+      <span class="tech-label">Language</span>
+      <span class="tech-value">C++20</span>
+      <span class="tech-note">Smart pointers · RAII · constexpr · std::numbers</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-label">Library</span>
+      <span class="tech-value">SDL3</span>
+      <span class="tech-note">Windowing · Renderer · AudioStream API</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-label">Build</span>
+      <span class="tech-value">CMake 3.20+</span>
+      <span class="tech-note">FetchContent fallback · ASAN in Debug</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-label">Resolution</span>
+      <span class="tech-value">640 × 360</span>
+      <span class="tech-note">SDL_LOGICAL_PRESENTATION_INTEGER_SCALE</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-label">Timestep</span>
+      <span class="tech-value">60 Hz fixed</span>
+      <span class="tech-note">Accumulator loop · 250 ms spiral guard</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-label">Audio</span>
+      <span class="tech-value">Real-time PCM</span>
+      <span class="tech-note">Square wave + xorshift white noise · mutex-safe queue</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-label">Terrain</span>
+      <span class="tech-value">Midpoint Displacement</span>
+      <span class="tech-note">Heightmap · Deform(cx,cy,r) concave crater</span>
+    </div>
+    <div class="tech-item">
+      <span class="tech-label">Particles</span>
+      <span class="tech-value">2 048-pool</span>
+      <span class="tech-note">Additive + alpha passes · round-robin allocation</span>
+    </div>
+
+  </div>
+
+  <div class="build-block">
+    <h3>Build in 3 commands</h3>
+    <pre class="code-block"><code><span class="cmd-prompt">$</span> git clone git@github.com:xavierbasc/artillery-tank-app.git
+<span class="cmd-prompt">$</span> cmake -B build -DCMAKE_BUILD_TYPE=Release
+<span class="cmd-prompt">$</span> cmake --build build -j$(nproc)</code></pre>
+    <p class="build-note">SDL3 is downloaded automatically via FetchContent if not found on your system.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ FOOTER ═══════════════════════════════════ -->
+<footer class="footer">
+  <p class="footer-title">PIXEL ARTILLERY COMMAND</p>
+  <p class="footer-copy">Open source · MIT License · Built with SDL3 &amp; C++20</p>
+  <div class="footer-links">
+    <a href="https://github.com/xavierbasc/artillery-tank-app" target="_blank" rel="noopener">Source Code</a>
+    <a href="https://github.com/xavierbasc/artillery-tank-app/releases" target="_blank" rel="noopener">Releases</a>
+    <a href="https://github.com/xavierbasc/artillery-tank-app/issues" target="_blank" rel="noopener">Report Bug</a>
+  </div>
+  <div class="pixel-footer-art" aria-hidden="true">
+    ████ ████  ██   ██  ██████  ███████  ██████
+    ██████████  ██ ██   ██  ██  ██  ██  ██
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
