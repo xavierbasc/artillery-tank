@@ -1,0 +1,44 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:          # permite lanzarlo manualmente desde la UI
+
+# Permisos mínimos necesarios para el deployment de Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Evita deployments paralelos; el que llegue segundo cancela el primero
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # configure-pages valida que Pages esté habilitado en el repo
+      # y inyecta la base_url correcta en el artefacto
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Sube el contenido del repo raíz como artefacto de Pages.
+      # Como el sitio es HTML/CSS/JS puro no hay paso de build.
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
