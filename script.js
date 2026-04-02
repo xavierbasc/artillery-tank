@@ -47,32 +47,37 @@
   const ctx = canvas.getContext('2d');
   const W = 640, H = 360;
 
-  // ── Terrain (midpoint displacement, JS port) ─────────────────────────────
+  // ── Terrain: suma de ondas sinusoidales de baja frecuencia ───────────────
+  // Produce colinas suaves sin picos bruscos.  Baseline en y=290 (cuarto
+  // inferior del canvas 360px).  Tres capas de frecuencia descendente:
+  //   · macro-ondula (1-2 colinas en todo el mapa)
+  //   · semi-ondula  (3-5 colinas)
+  //   · micro-detalle (muy poca amplitud, da textura sin romperse)
   function generateTerrain(seed) {
-    function lcg(s) { return (s * 1664525 + 1013904223) >>> 0; }
     let rng = seed >>> 0;
-    const rand = (lo, hi) => { rng = lcg(rng); return lo + (rng / 0xFFFFFFFF) * (hi - lo); };
-
-    const heights = new Int32Array(W).fill(0);
-    // Terreno bajo: anchors en y=295 (cuarto inferior del canvas de 360px)
-    heights[0]     = 295;
-    heights[W - 1] = 295;
-
-    let scale = 30;  // variación mínima para que el terreno se mantenga abajo
-    for (let step = W - 1; step > 1; step >>= 1) {
-      for (let x = 0; x < W - 1; x += step) {
-        const mid = x + (step >> 1);
-        if (mid >= W) continue;
-        heights[mid] = ((heights[x] + heights[x + step]) >> 1) + rand(-scale, scale);
-        // Clamp: y=265..320 → superficie en el cuarto inferior, ~265px de cielo
-        heights[mid] = Math.max(265, Math.min(320, heights[mid]));
-      }
-      scale *= 0.58;
+    function next() {
+      rng ^= rng << 13; rng ^= rng >> 17; rng ^= rng << 5;
+      return (rng >>> 0) / 0xFFFFFFFF;
     }
-    // Smooth 3×
-    for (let p = 0; p < 3; p++) {
-      for (let x = 1; x < W - 1; x++)
-        heights[x] = (heights[x - 1] + heights[x] + heights[x + 1]) / 3 | 0;
+    const rand = (lo, hi) => lo + next() * (hi - lo);
+
+    const baseline = 290;
+
+    // Tres capas sinusoidales; amplitudes pequeñas para que el terreno
+    // permanezca bajo y las transiciones sean muy graduales.
+    const layers = [
+      { cycles: rand(0.8, 1.8), phase: rand(0, Math.PI * 2), amp: rand(14, 22) },
+      { cycles: rand(2.5, 4.5), phase: rand(0, Math.PI * 2), amp: rand(6,  12) },
+      { cycles: rand(6.0, 10.),  phase: rand(0, Math.PI * 2), amp: rand(2,   5) },
+    ];
+
+    const heights = new Int32Array(W);
+    for (let x = 0; x < W; x++) {
+      let h = baseline;
+      for (const l of layers) {
+        h += Math.sin((x / W) * l.cycles * 2 * Math.PI + l.phase) * l.amp;
+      }
+      heights[x] = Math.max(262, Math.min(322, Math.round(h)));
     }
     return heights;
   }
