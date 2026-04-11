@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pixel Artillery Command</title>
+  <title>TerraShell Fracture — Artillery Warfare</title>
+  <meta name="description" content="Turn-based artillery warfare with fully destructible terrain, real-time synthesis audio, and brutal physics. Blow the world apart." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -11,224 +12,272 @@
 <body>
 
 <!-- ═══════════════════════════════════ HERO ════════════════════════════════ -->
-<header class="hero">
-  <div class="scanlines"></div>
-  <canvas id="starfield" aria-hidden="true"></canvas>
+<header class="hero" id="top">
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette"  aria-hidden="true"></div>
 
   <nav class="nav">
-    <span class="nav-logo">PAC</span>
+    <a href="#top" class="nav-logo">
+      <span class="logo-terra">TERRA</span><span class="logo-shell">SHELL</span>
+    </a>
     <ul class="nav-links">
+      <li><a href="#arena">Demo</a></li>
       <li><a href="#features">Features</a></li>
-      <li><a href="#how-to-play">How to Play</a></li>
-      <li><a href="#weapons">Weapons</a></li>
-      <li><a href="#tech">Tech</a></li>
-      <li><a href="#get-the-game">Get the Game</a></li>
+      <li><a href="#weapons">Arsenal</a></li>
+      <li><a href="#howtoplay">Controls</a></li>
+      <li><a href="#download" class="nav-cta">Get the Game</a></li>
     </ul>
+    <button class="nav-burger" aria-label="Menu" id="burger">☰</button>
   </nav>
 
   <div class="hero-content">
-    <div class="pixel-tank" aria-hidden="true">
-      <div class="tank-barrel"></div>
-      <div class="tank-turret"></div>
-      <div class="tank-hull"></div>
-      <div class="tank-tracks"></div>
-    </div>
+    <div class="hero-eyebrow">TURN-BASED ARTILLERY WARFARE</div>
 
-    <h1 class="hero-title">
-      <span class="title-pixel">PIXEL</span><br>
-      <span class="title-artillery">ARTILLERY</span><br>
-      <span class="title-command">COMMAND</span>
+    <h1 class="hero-title" data-glitch="TERRASHELL FRACTURE">
+      <span class="ht-terra">TERRA</span><span class="ht-shell">SHELL</span><br>
+      <span class="ht-fracture">FRACTURE</span>
     </h1>
-    <p class="hero-sub">Turn-based artillery warfare. Destructible terrain. Retro synthesis audio.</p>
+
+    <p class="hero-sub">
+      Destroy terrain. Outgun your enemy.<br>
+      Every shot reshapes the battlefield forever.
+    </p>
 
     <div class="cta-row">
-      <a class="btn btn-primary" href="#get-the-game">
-        Get the Game
+      <a class="btn btn-fire" href="#download">
+        <span class="btn-icon">⚡</span> GET THE GAME
       </a>
-      <a class="btn btn-secondary" href="#features">
-        Learn More
+      <a class="btn btn-ghost" href="#arena">
+        WATCH DEMO
       </a>
     </div>
 
-    <p class="platforms">
-      <span class="platform-badge win">Windows</span>
-      <span class="platform-badge mac">macOS</span>
-      <span class="platform-badge lin">Linux</span>
-      <span class="platform-badge ios">iOS</span>
-      <span class="platform-badge and">Android</span>
-    </p>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-n">4</span><span class="hstat-l">Weapons</span></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><span class="hstat-n">2048</span><span class="hstat-l">Particles</span></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><span class="hstat-n">60Hz</span><span class="hstat-l">Physics</span></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><span class="hstat-n">5</span><span class="hstat-l">Platforms</span></div>
+    </div>
   </div>
 
-  <div class="hero-preview">
-    <canvas id="demo" width="320" height="180" aria-label="Game preview"></canvas>
-    <span class="demo-label">Live Preview</span>
+  <div class="scroll-cue" aria-hidden="true">
+    <span class="scroll-arrow">▼</span>
   </div>
-
-  <div class="scroll-hint">▼ scroll</div>
 </header>
 
-<!-- ═══════════════════════════════ FEATURES ════════════════════════════════ -->
+<!-- ═══════════════════════════════════ DEMO ════════════════════════════════ -->
+<section id="arena" class="section section-arena">
+  <div class="arena-frame">
+    <div class="arena-label-bar">
+      <span class="arena-badge">LIVE SIMULATION</span>
+      <span class="arena-hint">Destructible terrain · Real-time particles · Wind physics</span>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="demo" width="640" height="360" aria-label="Live game preview"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ FEATURES ═════════════════════════════════ -->
 <section id="features" class="section section-dark">
-  <h2 class="section-title">Features</h2>
+  <div class="section-header">
+    <div class="section-tag">MECHANICS</div>
+    <h2 class="section-title">Battlefield Systems</h2>
+  </div>
+
   <div class="features-grid">
 
-    <article class="feature-card">
-      <div class="feature-icon">💥</div>
+    <article class="fcard fcard-fire reveal">
+      <div class="fcard-glow"></div>
+      <div class="fcard-icon">💥</div>
       <h3>Destructible Terrain</h3>
-      <p>Every shot reshapes the battlefield. Procedural Midpoint Displacement generates a unique landscape each round; explosions carve physically accurate circular craters in real time.</p>
+      <p>Every explosion carves a physically accurate crater into the heightmap. Midpoint Displacement generates a unique landscape each round — no two battles are alike.</p>
     </article>
 
-    <article class="feature-card">
-      <div class="feature-icon">🎇</div>
+    <article class="fcard fcard-orange reveal">
+      <div class="fcard-glow"></div>
+      <div class="fcard-icon">🔥</div>
       <h3>Multi-layer Particles</h3>
-      <p>2 048-particle pool. Explosions render in three passes: additive white flash → orange shockwave ring → physics debris with gravity and friction → rising smoke plume.</p>
+      <p>2,048-particle pool. Additive white flash → orange shockwave → physics debris → rising smoke. All rendered in three blending passes with zero allocations during play.</p>
     </article>
 
-    <article class="feature-card">
-      <div class="feature-icon">🎵</div>
-      <h3>Retro Synth Audio</h3>
-      <p>Every sound is synthesised in real time — no audio files. A descending square-wave cannon shot and an exponentially-decaying white-noise explosion, generated on the fly.</p>
+    <article class="fcard fcard-blue reveal">
+      <div class="fcard-glow"></div>
+      <div class="fcard-icon">🎵</div>
+      <h3>Synth + MOD Audio</h3>
+      <p>Cannon shots and explosions synthesised in real-time. Menu and battle each play a different MOD tracker soundtrack via a custom SDL3 AudioStream engine.</p>
     </article>
 
-    <article class="feature-card">
-      <div class="feature-icon">🌬</div>
+    <article class="fcard fcard-green reveal">
+      <div class="fcard-glow"></div>
+      <div class="fcard-icon">🌬️</div>
       <h3>Wind Physics</h3>
-      <p>Randomised wind force changes every turn and affects projectiles and smoke particles alike. Factor it in — or aim poorly and blame the weather.</p>
+      <p>Randomised wind changes every turn. It pushes both projectiles and smoke. Factor it in, or aim wide and blame the weather.</p>
     </article>
 
-    <article class="feature-card">
-      <div class="feature-icon">🛒</div>
+    <article class="fcard fcard-gold reveal">
+      <div class="fcard-glow"></div>
+      <div class="fcard-icon">🛒</div>
       <h3>Shop & Economy</h3>
-      <p>Land hits to earn credits. Spend them between rounds on Nukes, Cluster Bombs, and Penetrators. Strategic shopping is the difference between victory and rubble.</p>
+      <p>Earn credits by landing hits. Spend them between rounds on Nukes, Cluster Bombs, and Penetrators. Strategic shopping wins wars.</p>
     </article>
 
-    <article class="feature-card">
-      <div class="feature-icon">📱</div>
+    <article class="fcard fcard-purple reveal">
+      <div class="fcard-glow"></div>
+      <div class="fcard-icon">📱</div>
       <h3>Touch + Keyboard</h3>
-      <p>Drag to aim, drag to set power, tap to fire. Precision controls on every platform — optimised for both touchscreen and keyboard play.</p>
+      <p>Full gamepad, keyboard and multitouch support. Left half aims, right half sets power, centre tap fires. Works pixel-perfect on any screen size.</p>
     </article>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ WEAPONS ══════════════════════════════════ -->
+<section id="weapons" class="section section-mid">
+  <div class="section-header">
+    <div class="section-tag">ORDNANCE</div>
+    <h2 class="section-title">Arsenal</h2>
+  </div>
+
+  <div class="weapons-grid">
+
+    <div class="wcard reveal" data-weapon="shell">
+      <div class="wcard-top">
+        <div class="wcard-art shell-art">
+          <div class="shell-body"></div>
+          <div class="shell-tip"></div>
+          <div class="shell-trail"></div>
+        </div>
+        <div class="wcard-name-block">
+          <h3 class="wcard-name">Shell</h3>
+          <span class="wcard-cost free">∞ Unlimited</span>
+        </div>
+      </div>
+      <div class="wcard-bars">
+        <div class="wbar"><span>DMG</span><div class="wbar-track"><div class="wbar-fill" style="--pct:30%;--clr:#ff8c40"></div></div></div>
+        <div class="wbar"><span>RAD</span><div class="wbar-track"><div class="wbar-fill" style="--pct:32%;--clr:#ff8c40"></div></div></div>
+        <div class="wbar"><span>SPD</span><div class="wbar-track"><div class="wbar-fill" style="--pct:75%;--clr:#ff8c40"></div></div></div>
+      </div>
+      <p class="wcard-desc">The backbone of every strategy. Reliable, fast, unlimited. Master the arc before you spend credits.</p>
+    </div>
+
+    <div class="wcard reveal wcard-featured" data-weapon="nuke">
+      <div class="wcard-badge">DEVASTATOR</div>
+      <div class="wcard-top">
+        <div class="wcard-art nuke-art">
+          <div class="nuke-glow"></div>
+          <div class="nuke-body"></div>
+          <div class="nuke-ring ring1"></div>
+          <div class="nuke-ring ring2"></div>
+        </div>
+        <div class="wcard-name-block">
+          <h3 class="wcard-name">Nuke</h3>
+          <span class="wcard-cost">5,000 CR</span>
+        </div>
+      </div>
+      <div class="wcard-bars">
+        <div class="wbar"><span>DMG</span><div class="wbar-track"><div class="wbar-fill" style="--pct:85%;--clr:#ff3020"></div></div></div>
+        <div class="wbar"><span>RAD</span><div class="wbar-track"><div class="wbar-fill" style="--pct:100%;--clr:#ff3020"></div></div></div>
+        <div class="wbar"><span>SPD</span><div class="wbar-track"><div class="wbar-fill" style="--pct:60%;--clr:#ff3020"></div></div></div>
+      </div>
+      <p class="wcard-desc">Screen-filling white flash. Obliterates a third of the map. Win the war — lose the landscape.</p>
+    </div>
+
+    <div class="wcard reveal" data-weapon="cluster">
+      <div class="wcard-top">
+        <div class="wcard-art cluster-art">
+          <div class="cluster-main"></div>
+          <div class="cluster-sub cs1"></div>
+          <div class="cluster-sub cs2"></div>
+          <div class="cluster-sub cs3"></div>
+        </div>
+        <div class="wcard-name-block">
+          <h3 class="wcard-name">Cluster</h3>
+          <span class="wcard-cost">3,000 CR</span>
+        </div>
+      </div>
+      <div class="wcard-bars">
+        <div class="wbar"><span>DMG</span><div class="wbar-track"><div class="wbar-fill" style="--pct:20%;--clr:#ffd040"></div></div></div>
+        <div class="wbar"><span>RAD</span><div class="wbar-track"><div class="wbar-fill" style="--pct:15%;--clr:#ffd040"></div></div></div>
+        <div class="wbar"><span>SPD</span><div class="wbar-track"><div class="wbar-fill" style="--pct:80%;--clr:#ffd040"></div></div></div>
+      </div>
+      <p class="wcard-desc">Splits into 6 sub-shells on impact. Excellent area denial — terrible for precision shooting.</p>
+    </div>
+
+    <div class="wcard reveal" data-weapon="penetrator">
+      <div class="wcard-top">
+        <div class="wcard-art penetrator-art">
+          <div class="pen-shaft"></div>
+          <div class="pen-tip"></div>
+          <div class="pen-fins"></div>
+        </div>
+        <div class="wcard-name-block">
+          <h3 class="wcard-name">Penetrator</h3>
+          <span class="wcard-cost">2,000 CR</span>
+        </div>
+      </div>
+      <div class="wcard-bars">
+        <div class="wbar"><span>DMG</span><div class="wbar-track"><div class="wbar-fill" style="--pct:50%;--clr:#60c0ff"></div></div></div>
+        <div class="wbar"><span>RAD</span><div class="wbar-track"><div class="wbar-fill" style="--pct:27%;--clr:#60c0ff"></div></div></div>
+        <div class="wbar"><span>SPD</span><div class="wbar-track"><div class="wbar-fill" style="--pct:90%;--clr:#60c0ff"></div></div></div>
+      </div>
+      <p class="wcard-desc">Burrows underground before detonating. Defeats enemies hiding behind hills or dug in deep.</p>
+    </div>
 
   </div>
 </section>
 
 <!-- ════════════════════════════ HOW TO PLAY ════════════════════════════════ -->
-<section id="how-to-play" class="section section-mid">
-  <h2 class="section-title">How to Play</h2>
-
-  <div class="controls-layout">
-    <div class="controls-col">
-      <h3 class="controls-heading">⌨ Keyboard (PC / Mac)</h3>
-      <table class="controls-table">
-        <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Adjust barrel angle</td></tr>
-        <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Adjust shot power</td></tr>
-        <tr><td><kbd>Space</kbd></td><td>Fire!</td></tr>
-        <tr><td><kbd>Tab</kbd></td><td>Cycle weapon</td></tr>
-        <tr><td><kbd>Enter</kbd></td><td>Confirm / buy in shop</td></tr>
-        <tr><td><kbd>Esc</kbd></td><td>Close shop</td></tr>
-      </table>
-    </div>
-
-    <div class="controls-divider">VS</div>
-
-    <div class="controls-col">
-      <h3 class="controls-heading">👆 Touch (iOS / Android)</h3>
-      <table class="controls-table">
-        <tr><td>Drag left half</td><td>Adjust barrel angle</td></tr>
-        <tr><td>Drag right half</td><td>Adjust shot power</td></tr>
-        <tr><td>Tap FIRE button</td><td>Fire!</td></tr>
-        <tr><td>Tap weapon row</td><td>Buy in shop</td></tr>
-        <tr><td>Tap DONE</td><td>Close shop</td></tr>
-      </table>
-    </div>
+<section id="howtoplay" class="section section-dark">
+  <div class="section-header">
+    <div class="section-tag">BRIEFING</div>
+    <h2 class="section-title">Rules of Engagement</h2>
   </div>
 
-  <div class="turn-flow">
-    <div class="flow-step active-step">
-      <span class="step-num">1</span>
-      <span>Aim</span>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <span class="step-num">2</span>
-      <span>Fire</span>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <span class="step-num">3</span>
-      <span>Boom</span>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <span class="step-num">4</span>
-      <span>Shop</span>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <span class="step-num">5</span>
-      <span>Repeat</span>
-    </div>
-  </div>
-</section>
+  <div class="htp-layout">
 
-<!-- ══════════════════════════════ WEAPONS ══════════════════════════════════ -->
-<section id="weapons" class="section section-dark">
-  <h2 class="section-title">Arsenal</h2>
-  <div class="weapons-grid">
-
-    <div class="weapon-card" data-cost="STANDARD">
-      <div class="weapon-pixel shell-pixel"></div>
-      <h3>Shell</h3>
-      <div class="weapon-stat">
-        <span>Damage</span>
-        <div class="stat-bar"><div class="stat-fill" style="width:30%"></div></div>
-      </div>
-      <div class="weapon-stat">
-        <span>Radius</span>
-        <div class="stat-bar"><div class="stat-fill" style="width:32%"></div></div>
-      </div>
-      <p class="weapon-desc">Your reliable starting weapon — unlimited ammo and solid hitting power. The foundation of every strategy.</p>
+    <div class="htp-flow reveal">
+      <div class="flow-step fs-active"><span class="fs-n">01</span><span class="fs-t">Aim</span></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><span class="fs-n">02</span><span class="fs-t">Power</span></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><span class="fs-n">03</span><span class="fs-t">Fire</span></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><span class="fs-n">04</span><span class="fs-t">Boom</span></div>
+      <div class="flow-line"></div>
+      <div class="flow-step"><span class="fs-n">05</span><span class="fs-t">Shop</span></div>
     </div>
 
-    <div class="weapon-card" data-cost="5000 CR">
-      <div class="weapon-pixel nuke-pixel"></div>
-      <h3>Nuke</h3>
-      <div class="weapon-stat">
-        <span>Damage</span>
-        <div class="stat-bar"><div class="stat-fill" style="width:85%"></div></div>
+    <div class="htp-controls">
+      <div class="ctrl-panel reveal">
+        <h3 class="ctrl-head"><span class="ctrl-icon">⌨</span> Keyboard</h3>
+        <table class="ctrl-table">
+          <tr><td><kbd>← →</kbd></td><td>Adjust barrel angle</td></tr>
+          <tr><td><kbd>↑ ↓</kbd></td><td>Adjust shot power</td></tr>
+          <tr><td><kbd>Space</kbd></td><td>Fire!</td></tr>
+          <tr><td><kbd>Tab</kbd></td><td>Cycle weapon</td></tr>
+          <tr><td><kbd>Enter</kbd></td><td>Confirm / buy</td></tr>
+          <tr><td><kbd>Esc</kbd></td><td>Pause / close shop</td></tr>
+        </table>
       </div>
-      <div class="weapon-stat">
-        <span>Radius</span>
-        <div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div>
-      </div>
-      <p class="weapon-desc">Screen-filling white flash. Obliterates a third of the map. Win the war, lose the landscape.</p>
-    </div>
 
-    <div class="weapon-card" data-cost="3000 CR">
-      <div class="weapon-pixel cluster-pixel"></div>
-      <h3>Cluster</h3>
-      <div class="weapon-stat">
-        <span>Damage</span>
-        <div class="stat-bar"><div class="stat-fill" style="width:20%"></div></div>
-      </div>
-      <div class="weapon-stat">
-        <span>Radius</span>
-        <div class="stat-bar"><div class="stat-fill" style="width:15%"></div></div>
-      </div>
-      <p class="weapon-desc">Splits into 6 sub-shells mid-flight. Excellent area denial; terrible for precision.</p>
-    </div>
+      <div class="ctrl-vs reveal">VS</div>
 
-    <div class="weapon-card" data-cost="2000 CR">
-      <div class="weapon-pixel penetrator-pixel"></div>
-      <h3>Penetrator</h3>
-      <div class="weapon-stat">
-        <span>Damage</span>
-        <div class="stat-bar"><div class="stat-fill" style="width:50%"></div></div>
+      <div class="ctrl-panel reveal">
+        <h3 class="ctrl-head"><span class="ctrl-icon">👆</span> Touch</h3>
+        <table class="ctrl-table">
+          <tr><td>Drag left</td><td>Adjust barrel angle</td></tr>
+          <tr><td>Drag right</td><td>Adjust shot power</td></tr>
+          <tr><td>FIRE button</td><td>Fire!</td></tr>
+          <tr><td>Tap weapon</td><td>Buy in shop</td></tr>
+          <tr><td>Tap DONE</td><td>Close shop</td></tr>
+          <tr><td>Long press</td><td>Pause menu</td></tr>
+        </table>
       </div>
-      <div class="weapon-stat">
-        <span>Radius</span>
-        <div class="stat-bar"><div class="stat-fill" style="width:27%"></div></div>
-      </div>
-      <p class="weapon-desc">Burrows underground before detonating. Defeats enemies sheltering behind hills.</p>
     </div>
 
   </div>
@@ -236,126 +285,135 @@
 
 <!-- ═══════════════════════════════ TECH ════════════════════════════════════ -->
 <section id="tech" class="section section-mid">
-  <h2 class="section-title">Under the Hood</h2>
+  <div class="section-header">
+    <div class="section-tag">SPECIFICATIONS</div>
+    <h2 class="section-title">Under the Hood</h2>
+  </div>
+
   <div class="tech-grid">
-
-    <div class="tech-item">
-      <span class="tech-label">Language</span>
-      <span class="tech-value">C++20</span>
-      <span class="tech-note">Smart pointers · RAII · constexpr · std::numbers</span>
+    <div class="tech-item reveal">
+      <span class="ti-label">Language</span>
+      <span class="ti-value">C++20</span>
+      <span class="ti-note">Smart pointers · RAII · constexpr · std::numbers</span>
     </div>
-    <div class="tech-item">
-      <span class="tech-label">Engine</span>
-      <span class="tech-value">SDL3</span>
-      <span class="tech-note">Windowing · GPU Renderer · AudioStream API</span>
+    <div class="tech-item reveal">
+      <span class="ti-label">Engine</span>
+      <span class="ti-value">SDL3</span>
+      <span class="ti-note">Windowing · GPU Renderer · AudioStream callback</span>
     </div>
-    <div class="tech-item">
-      <span class="tech-label">Resolution</span>
-      <span class="tech-value">640 × 360</span>
-      <span class="tech-note">Integer scaling — pixel-perfect on any screen size</span>
+    <div class="tech-item reveal">
+      <span class="ti-label">Resolution</span>
+      <span class="ti-value">640 × 360</span>
+      <span class="ti-note">Integer scale — pixel-perfect on any display</span>
     </div>
-    <div class="tech-item">
-      <span class="tech-label">Timestep</span>
-      <span class="tech-value">60 Hz fixed</span>
-      <span class="tech-note">Deterministic physics on all platforms</span>
+    <div class="tech-item reveal">
+      <span class="ti-label">Timestep</span>
+      <span class="ti-value">60 Hz fixed</span>
+      <span class="ti-note">Deterministic physics across all platforms</span>
     </div>
-    <div class="tech-item">
-      <span class="tech-label">Audio</span>
-      <span class="tech-value">Real-time PCM</span>
-      <span class="tech-note">Square wave + white noise synthesised on the fly</span>
+    <div class="tech-item reveal">
+      <span class="ti-label">Audio</span>
+      <span class="ti-value">PCM + MOD</span>
+      <span class="ti-note">Real-time synthesis + libxmp tracker playback</span>
     </div>
-    <div class="tech-item">
-      <span class="tech-label">Terrain</span>
-      <span class="tech-value">Midpoint Displacement</span>
-      <span class="tech-note">Procedural · pixel-level destruction each round</span>
+    <div class="tech-item reveal">
+      <span class="ti-label">Terrain</span>
+      <span class="ti-value">Midpoint Displace</span>
+      <span class="ti-note">Procedural · pixel-level destruction per round</span>
     </div>
-    <div class="tech-item">
-      <span class="tech-label">Particles</span>
-      <span class="tech-value">2 048-pool</span>
-      <span class="tech-note">Additive flash + alpha debris — no allocation during play</span>
+    <div class="tech-item reveal">
+      <span class="ti-label">Particles</span>
+      <span class="ti-value">2,048 pool</span>
+      <span class="ti-note">Additive flash + alpha debris — zero alloc in-game</span>
     </div>
-    <div class="tech-item">
-      <span class="tech-label">Platforms</span>
-      <span class="tech-value">5 targets</span>
-      <span class="tech-note">Windows · macOS · Linux · iOS · Android</span>
+    <div class="tech-item reveal">
+      <span class="ti-label">Platforms</span>
+      <span class="ti-value">5 targets</span>
+      <span class="ti-note">Windows · macOS · Linux · iOS · Android</span>
     </div>
-
   </div>
 </section>
 
-<!-- ══════════════════════════════ GET THE GAME ══════════════════════════════ -->
-<section id="get-the-game" class="section section-dark">
-  <h2 class="section-title">Get the Game</h2>
-  <p class="store-sub">Available on all major platforms. Pick yours and start the bombardment.</p>
+<!-- ══════════════════════════════ DOWNLOAD ══════════════════════════════════ -->
+<section id="download" class="section section-download">
+  <canvas id="explosion-canvas" aria-hidden="true"></canvas>
+
+  <div class="section-header">
+    <div class="section-tag">DEPLOYMENT</div>
+    <h2 class="section-title dl-title">Get the Game</h2>
+  </div>
+
+  <p class="dl-sub">Available on all major platforms. Pick yours and start the bombardment.</p>
 
   <div class="store-grid">
 
-    <a class="store-btn ios-btn" href="#" aria-label="Download on the App Store">
-      <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <a class="sbtn ios-btn reveal" href="#" aria-label="Download on the App Store">
+      <svg class="sbtn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
       </svg>
-      <span class="store-btn-text">
-        <span class="store-btn-sub">Download on the</span>
-        <span class="store-btn-name">App Store</span>
-      </span>
-      <span class="store-btn-badge">Soon</span>
+      <div class="sbtn-text">
+        <span class="sbtn-sub">Download on the</span>
+        <span class="sbtn-name">App Store</span>
+      </div>
+      <span class="sbtn-pill">Soon</span>
     </a>
 
-    <a class="store-btn android-btn" href="#" aria-label="Get it on Google Play">
-      <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <a class="sbtn and-btn reveal" href="#" aria-label="Get it on Google Play">
+      <svg class="sbtn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M3.18 23.76a1.05 1.05 0 01-.54-.15 1.1 1.1 0 01-.52-.96V1.35a1.1 1.1 0 01.52-.96 1.07 1.07 0 011.1.04l17.46 10.65a1.1 1.1 0 010 1.84L3.74 23.57a1.07 1.07 0 01-.56.19z"/>
       </svg>
-      <span class="store-btn-text">
-        <span class="store-btn-sub">Get it on</span>
-        <span class="store-btn-name">Google Play</span>
-      </span>
-      <span class="store-btn-badge">Soon</span>
+      <div class="sbtn-text">
+        <span class="sbtn-sub">Get it on</span>
+        <span class="sbtn-name">Google Play</span>
+      </div>
+      <span class="sbtn-pill">Soon</span>
     </a>
 
-    <a class="store-btn steam-btn" href="#" aria-label="Available on Steam">
-      <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.718L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.455 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273.016c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/>
+    <a class="sbtn steam-btn reveal" href="#" aria-label="Available on Steam">
+      <svg class="sbtn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.718L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0z"/>
       </svg>
-      <span class="store-btn-text">
-        <span class="store-btn-sub">Available on</span>
-        <span class="store-btn-name">Steam</span>
-      </span>
-      <span class="store-btn-badge">Soon</span>
+      <div class="sbtn-text">
+        <span class="sbtn-sub">Available on</span>
+        <span class="sbtn-name">Steam</span>
+      </div>
+      <span class="sbtn-pill">Soon</span>
     </a>
 
-    <a class="store-btn pc-btn" href="#" aria-label="Download for Windows and Mac">
-      <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <a class="sbtn pc-btn reveal" href="#" aria-label="Direct download PC & Mac">
+      <svg class="sbtn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
       </svg>
-      <span class="store-btn-text">
-        <span class="store-btn-sub">Direct download</span>
-        <span class="store-btn-name">PC &amp; Mac</span>
-      </span>
-      <span class="store-btn-badge">Soon</span>
+      <div class="sbtn-text">
+        <span class="sbtn-sub">Direct download</span>
+        <span class="sbtn-name">PC &amp; Mac</span>
+      </div>
+      <span class="sbtn-pill">Soon</span>
     </a>
 
   </div>
 
-  <p class="newsletter-hint">
-    Stay in the loop — contact <strong class="author-name">Javier Bascones Velázquez</strong><br>
-    <a href="mailto:javier.bascones@gmail.com" class="mail-link">javier.bascones@gmail.com</a>
+  <p class="dl-contact">
+    Stay in the loop — contact
+    <strong>Javier Bascones Velázquez</strong><br>
+    <a href="mailto:javier.bascones@gmail.com" class="dl-mail">javier.bascones@gmail.com</a>
   </p>
 </section>
 
 <!-- ══════════════════════════════ FOOTER ═══════════════════════════════════ -->
 <footer class="footer">
-  <p class="footer-title">PIXEL ARTILLERY COMMAND</p>
-  <p class="footer-copy">&copy; 2026 Pixel Artillery Command. All rights reserved.</p>
-  <p class="footer-author">by Javier Bascones Velázquez</p>
+  <div class="footer-logo">
+    <span class="logo-terra">TERRA</span><span class="logo-shell">SHELL</span>
+    <span class="footer-fracture">FRACTURE</span>
+  </div>
   <div class="footer-links">
     <a href="mailto:javier.bascones@gmail.com">Contact</a>
-    <a href="#">Privacy Policy</a>
+    <a href="#">Privacy</a>
     <a href="#">Press Kit</a>
+    <a href="https://github.com/xavierbasc/terrashell-fracture" target="_blank" rel="noopener">Source</a>
   </div>
-  <div class="pixel-footer-art" aria-hidden="true">
-    ████ ████  ██   ██  ██████  ███████  ██████
-    ██████████  ██ ██   ██  ██  ██  ██  ██
-  </div>
+  <p class="footer-copy">&copy; 2026 Javier Bascones Velázquez · All rights reserved</p>
+  <div class="footer-terrain" aria-hidden="true" id="footer-terrain"></div>
 </footer>
 
 <script src="script.js"></script>
