@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --fire:    #ff5f00;
+  --fire2:   #ff8c00;
+  --gold:    #ffd040;
+  --danger:  #ff2a20;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #080808;
+  color: #c8c8e0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+::selection { background: rgba(255,95,0,0.35); color: #fff; }
+
+/* ── Custom scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: #080808; }
+::-webkit-scrollbar-thumb  { background: #ff5f00; }
+::-webkit-scrollbar-thumb:hover { background: #ff8c00; }
+
+/* ── Scanline overlay ──────────────────────────────────────────────────── */
+.scanlines {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px, transparent 3px,
+    rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px
+  );
+}
+
+/* ── Angled corners utility ─────────────────────────────────────────────── */
+.clip-angled {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+.clip-angled-sm {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+/* ── Glass card ─────────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+/* ── Text glow utilities ─────────────────────────────────────────────────── */
+.glow-fire   { text-shadow: 0 0 20px rgba(255,95,0,0.7),  0 0 40px rgba(255,95,0,0.3); }
+.glow-gold   { text-shadow: 0 0 20px rgba(255,208,64,0.6), 0 0 40px rgba(255,208,64,0.2); }
+.glow-danger { text-shadow: 0 0 20px rgba(255,42,32,0.7); }
+
+/* ── Border glow ─────────────────────────────────────────────────────────── */
+.border-glow-fire { box-shadow: 0 0 0 1px rgba(255,95,0,0.4), 0 0 20px rgba(255,95,0,0.15); }
+.border-glow-gold { box-shadow: 0 0 0 1px rgba(255,208,64,0.4), 0 0 20px rgba(255,208,64,0.15); }
+
+/* ── Pixel font helper ───────────────────────────────────────────────────── */
+.font-pixel { font-family: 'Press Start 2P', monospace; }
+.font-mono  { font-family: 'Space Mono', monospace; }
+
+/* ── Terminal cursor ─────────────────────────────────────────────────────── */
+.cursor::after { content: '█'; animation: blink 1s step-end infinite; font-size: 0.85em; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── Framer Motion will-change hint ─────────────────────────────────────── */
+.motion-safe { will-change: transform, opacity; }

@@ -5,10 +5,8 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# NOTA: GitHub no permite que GITHUB_TOKEN cree el sitio Pages por primera vez.
-# Requisito previo (una sola vez):
+# Prerequisite (one time only):
 #   Settings → Pages → Source → "GitHub Actions"
-# Tras eso, cada push a main despliega automáticamente.
 
 permissions:
   contents: read
@@ -26,12 +24,23 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # evita warning de deprecación Node.js 20
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js static export
+        run: npm run build
+        env:
+          NODE_ENV: production
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -39,7 +48,7 @@ jobs:
       - name: Upload static site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."   # sube index.html, style.css, script.js desde la raíz
+          path: "./out"
 
       - name: Deploy to GitHub Pages
         id: deployment
