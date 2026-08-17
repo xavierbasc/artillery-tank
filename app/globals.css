@@ -1,35 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Design system quotes the game's own in-game HUD language (see
+  src/UI/Widgets.h / ARCHITECTURE.md "Metal Slug" steel-plate style):
+  charcoal bevelled plates, amber primary accent, teal for
+  data/telemetry panels, red for ordnance/danger, warm cream for
+  HUD-style labels. The web and the game are meant to look like the
+  same object.
+*/
 :root {
-  --fire:    #ff5f00;
-  --fire2:   #ff8c00;
-  --gold:    #ffd040;
-  --danger:  #ff2a20;
+  --bg:         #0a0b0d;
+  --bg-2:       #0d0f12;
+  --panel:      #15181c;
+  --panel-2:    #1b1f24;
+  --bevel-hi:   rgba(255,255,255,0.09);
+  --bevel-lo:   rgba(0,0,0,0.6);
+  --line:       #262b31;
+  --line-2:     #33393f;
+
+  --amber:      #d69a1f;
+  --amber-2:    #ffb92e;
+  --amber-dim:  #8a6318;
+  --teal:       #2ea89a;
+  --teal-2:     #5fd6c6;
+  --red:        #c2321f;
+  --red-2:      #ff5b3d;
+  --green:      #4a9a3f;
+
+  --cream:      #ece0c4;
+  --ink:        #c7cad1;
+  --muted:      #6b7078;
+  --muted-2:    #454a51;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
-  background: #080808;
-  color: #c8c8e0;
-  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-mono), 'Courier New', monospace;
   font-size: 16px;
   overflow-x: hidden;
 }
 
-::selection { background: rgba(255,95,0,0.35); color: #fff; }
+::selection { background: rgba(214,154,31,0.35); color: #fff; }
 
 /* ── Custom scrollbar ──────────────────────────────────────────────────── */
-::-webkit-scrollbar        { width: 6px; }
-::-webkit-scrollbar-track  { background: #080808; }
-::-webkit-scrollbar-thumb  { background: #ff5f00; }
-::-webkit-scrollbar-thumb:hover { background: #ff8c00; }
+::-webkit-scrollbar        { width: 8px; }
+::-webkit-scrollbar-track  { background: var(--bg); }
+::-webkit-scrollbar-thumb  { background: var(--amber-dim); border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--amber); }
+
+/* ── Focus visibility (accessibility) ─────────────────────────────────── */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--amber-2);
+  outline-offset: 2px;
+}
+
+/* ── Fonts ─────────────────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display), 'Black Ops One', sans-serif; }
+.font-mono    { font-family: var(--font-mono), monospace; }
+.font-pixel   { font-family: var(--font-pixel), monospace; }
 
 /* ── Scanline overlay ──────────────────────────────────────────────────── */
 .scanlines {
@@ -37,11 +82,11 @@ body {
   background: repeating-linear-gradient(
     0deg,
     transparent 0px, transparent 3px,
-    rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px
+    rgba(0,0,0,0.10) 3px, rgba(0,0,0,0.10) 4px
   );
 }
 
-/* ── Angled corners utility ─────────────────────────────────────────────── */
+/* ── Angled corners utility (ordnance-plate look) ───────────────────────── */
 .clip-angled {
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
 }
@@ -49,29 +94,91 @@ body {
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
 }
 
-/* ── Glass card ─────────────────────────────────────────────────────────── */
-.glass {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.07);
+/* ── Steel plate: bevelled panel with TL highlight / BR shadow ─────────── */
+.plate {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow:
+    inset 1px 1px 0 var(--bevel-hi),
+    inset -1px -1px 0 var(--bevel-lo);
+}
+.plate-2 { background: var(--panel-2); }
+
+/* Corner rivets — decorative, matches the game's stamped-plate widgets */
+.rivets::before, .rivets::after {
+  content: '';
+  position: absolute;
+  width: 4px; height: 4px;
+  background: radial-gradient(circle at 35% 35%, #57534a, #201e19 70%);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.5);
+  border-radius: 1px;
+}
+.rivets::before { top: 5px; left: 5px; }
+.rivets::after  { bottom: 5px; right: 5px; }
+
+/* ── Hazard ticks (titlebar accent) ─────────────────────────────────────── */
+.hazard-ticks {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--amber) 0, var(--amber) 4px,
+    transparent 4px, transparent 9px
+  );
+  opacity: 0.5;
 }
 
 /* ── Text glow utilities ─────────────────────────────────────────────────── */
-.glow-fire   { text-shadow: 0 0 20px rgba(255,95,0,0.7),  0 0 40px rgba(255,95,0,0.3); }
-.glow-gold   { text-shadow: 0 0 20px rgba(255,208,64,0.6), 0 0 40px rgba(255,208,64,0.2); }
-.glow-danger { text-shadow: 0 0 20px rgba(255,42,32,0.7); }
+.glow-amber { text-shadow: 0 0 18px rgba(255,185,46,0.55), 0 0 40px rgba(255,185,46,0.2); }
+.glow-teal  { text-shadow: 0 0 18px rgba(95,214,198,0.5); }
+.glow-red   { text-shadow: 0 0 18px rgba(255,91,61,0.55); }
 
 /* ── Border glow ─────────────────────────────────────────────────────────── */
-.border-glow-fire { box-shadow: 0 0 0 1px rgba(255,95,0,0.4), 0 0 20px rgba(255,95,0,0.15); }
-.border-glow-gold { box-shadow: 0 0 0 1px rgba(255,208,64,0.4), 0 0 20px rgba(255,208,64,0.15); }
-
-/* ── Pixel font helper ───────────────────────────────────────────────────── */
-.font-pixel { font-family: 'Press Start 2P', monospace; }
-.font-mono  { font-family: 'Space Mono', monospace; }
+.border-glow-amber { box-shadow: 0 0 0 1px rgba(214,154,31,0.45), 0 0 24px rgba(214,154,31,0.15); }
+.border-glow-teal   { box-shadow: 0 0 0 1px rgba(46,168,154,0.45), 0 0 24px rgba(46,168,154,0.15); }
 
 /* ── Terminal cursor ─────────────────────────────────────────────────────── */
 .cursor::after { content: '█'; animation: blink 1s step-end infinite; font-size: 0.85em; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-/* ── Framer Motion will-change hint ─────────────────────────────────────── */
-.motion-safe { will-change: transform, opacity; }
+/* ── Grid texture ─────────────────────────────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(214,154,31,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(214,154,31,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Pixelated image rendering (pixel-art screenshots / canvas) ─────────── */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* ── Marquee ticker ──────────────────────────────────────────────────────── */
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker-scroll 42s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+}
+
+/* ── Bob (scroll cue) ─────────────────────────────────────────────────────── */
+@keyframes bob {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(6px); }
+}
+.animate-bob { animation: bob 2s ease-in-out infinite; }
+
+/* ── Ember pulse (used by CTA / danger accents) ──────────────────────────── */
+@keyframes pulse-amber {
+  0%,100% { box-shadow: 0 0 20px rgba(214,154,31,0.35); }
+  50%     { box-shadow: 0 0 40px rgba(255,185,46,0.75), 0 0 70px rgba(255,185,46,0.2); }
+}
+.animate-pulse-amber { animation: pulse-amber 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-amber, .animate-bob { animation: none; }
+}

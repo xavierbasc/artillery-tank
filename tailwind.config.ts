@@ -9,62 +9,40 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'fire':     '#ff5f00',
-        'fire-2':   '#ff8c00',
-        'gold':     '#ffd040',
-        'danger':   '#ff2a20',
-        'teal':     '#00d4aa',
-        'electric': '#1a90ff',
-        'surface':  '#0d0d0d',
-        'panel':    '#111116',
-        'border':   '#1e1e2e',
-        'border-2': '#2a2a3e',
+        bg:        '#0a0b0d',
+        'bg-2':    '#0d0f12',
+        panel:     '#15181c',
+        'panel-2': '#1b1f24',
+        line:      '#262b31',
+        'line-2':  '#33393f',
+
+        amber:      '#d69a1f',
+        'amber-2':  '#ffb92e',
+        'amber-dim':'#8a6318',
+        teal:       '#2ea89a',
+        'teal-2':   '#5fd6c6',
+        red:        '#c2321f',
+        'red-2':    '#ff5b3d',
+        green:      '#4a9a3f',
+
+        cream: '#ece0c4',
+        ink:   '#c7cad1',
+        muted: '#6b7078',
+        'muted-2': '#454a51',
       },
       fontFamily: {
-        pixel:  ['"Press Start 2P"', 'monospace'],
-        sans:   ['Inter', 'system-ui', 'sans-serif'],
-        mono:   ['"Space Mono"', 'monospace'],
-      },
-      animation: {
-        'pulse-fire': 'pulse-fire 2.5s ease-in-out infinite',
-        'glitch':     'glitch 6s infinite',
-        'bob':        'bob 2s ease-in-out infinite',
-        'ember':      'ember 3s ease-in infinite',
-        'scanline':   'scanline 8s linear infinite',
-        'blink':      'blink 1s step-end infinite',
-      },
-      keyframes: {
-        'pulse-fire': {
-          '0%,100%': { boxShadow: '0 0 20px rgba(255,95,0,0.4)' },
-          '50%':     { boxShadow: '0 0 45px rgba(255,95,0,0.8), 0 0 80px rgba(255,95,0,0.2)' },
-        },
-        'glitch': {
-          '0%,93%,100%': { clipPath: 'none', transform: 'none' },
-          '94%': { clipPath: 'inset(20% 0 60% 0)', transform: 'translateX(-3px)', filter: 'hue-rotate(90deg)' },
-          '95%': { clipPath: 'inset(60% 0 10% 0)', transform: 'translateX(3px)' },
-          '96%': { clipPath: 'none', transform: 'none', filter: 'none' },
-        },
-        'bob': {
-          '0%,100%': { transform: 'translateY(0)' },
-          '50%':     { transform: 'translateY(6px)' },
-        },
-        'scanline': {
-          '0%':   { transform: 'translateY(-100%)' },
-          '100%': { transform: 'translateY(100vh)' },
-        },
-        'blink': {
-          '0%,100%': { opacity: '1' },
-          '50%':     { opacity: '0' },
-        },
+        display: ['var(--font-display)', 'sans-serif'],
+        mono:    ['var(--font-mono)', 'monospace'],
+        pixel:   ['var(--font-pixel)', 'monospace'],
       },
       backgroundImage: {
-        'grid-subtle': `
-          linear-gradient(rgba(255,95,0,0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,95,0,0.04) 1px, transparent 1px)
+        grid: `
+          linear-gradient(rgba(214,154,31,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(214,154,31,0.05) 1px, transparent 1px)
         `,
       },
       backgroundSize: {
-        'grid-subtle': '40px 40px',
+        grid: '40px 40px',
       },
     },
   },

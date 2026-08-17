@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  { label: 'Demo',     href: '#arena' },
-  { label: 'Features', href: '#features' },
-  { label: 'Arsenal',  href: '#arsenal' },
-  { label: 'Controls', href: '#controls' },
-  { label: 'Tech',     href: '#specs' },
+  { label: 'Gallery',   href: '#arena' },
+  { label: 'Worlds',    href: '#scenarios' },
+  { label: 'Arsenal',   href: '#arsenal' },
+  { label: 'Offline',   href: '#offline' },
+  { label: 'Controls',  href: '#controls' },
+  { label: 'Tech',      href: '#specs' },
 ];
 
 export default function NavBar() {
@@ -28,15 +29,15 @@ export default function NavBar() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#080808]/90 backdrop-blur-md border-b border-[#1e1e2e]'
+          ? 'bg-bg/92 backdrop-blur-md border-b border-line'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         {/* Logo */}
-        <a href="#top" className="font-pixel text-xs leading-none flex items-center gap-0">
-          <span className="text-white">TERRA</span>
-          <span className="text-[#ff5f00] glow-fire">SHELL</span>
+        <a href="#top" className="font-display text-sm leading-none flex items-center gap-1 no-underline uppercase">
+          <span className="text-cream">Terra</span>
+          <span className="text-amber-2 glow-amber">Shell</span>
         </a>
 
         {/* Desktop links */}
@@ -45,7 +46,7 @@ export default function NavBar() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="font-mono text-xs text-[#606080] hover:text-[#ff8c00] transition-colors duration-200"
+                className="font-mono text-xs text-muted hover:text-amber-2 transition-colors duration-200"
               >
                 {l.label}
               </a>
@@ -56,16 +57,17 @@ export default function NavBar() {
         {/* CTA */}
         <a
           href="#download"
-          className="hidden md:flex items-center gap-2 font-mono text-xs text-[#ffd040] border border-[#ffd040]/40 px-4 py-2 clip-angled-sm hover:bg-[#ffd040]/10 hover:border-[#ffd040] transition-all duration-200"
+          className="hidden md:flex items-center gap-2 font-mono text-xs text-amber-2 border border-amber/40 px-4 py-2 clip-angled-sm hover:bg-amber/10 hover:border-amber transition-all duration-200"
         >
-          GET THE GAME
+          BUILD &amp; RUN
         </a>
 
         {/* Mobile burger */}
         <button
           onClick={() => setOpen(o => !o)}
-          className="md:hidden text-[#ff5f00] p-1"
+          className="md:hidden text-amber-2 p-1"
           aria-label="Toggle menu"
+          aria-expanded={open}
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -79,7 +81,7 @@ export default function NavBar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-[#0a0a0a] border-b border-[#1e1e2e] overflow-hidden"
+            className="md:hidden bg-bg-2 border-b border-line overflow-hidden"
           >
             <ul className="px-6 py-4 flex flex-col gap-4">
               {links.map(l => (
@@ -87,7 +89,7 @@ export default function NavBar() {
                   <a
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="font-mono text-sm text-[#909090] hover:text-[#ff8c00] transition-colors"
+                    className="font-mono text-sm text-ink hover:text-amber-2 transition-colors"
                   >
                     {l.label}
                   </a>
@@ -97,9 +99,9 @@ export default function NavBar() {
                 <a
                   href="#download"
                   onClick={() => setOpen(false)}
-                  className="font-mono text-sm text-[#ffd040] border border-[#ffd040]/40 px-4 py-2 inline-block"
+                  className="font-mono text-sm text-amber-2 border border-amber/40 px-4 py-2 inline-block"
                 >
-                  GET THE GAME
+                  BUILD &amp; RUN
                 </a>
               </li>
             </ul>
