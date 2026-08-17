@@ -1,35 +1,68 @@
-'use client';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Github, Copy, Check, Terminal } from 'lucide-react';
+import { Apple, AppWindow, Terminal, Smartphone, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
+import { asset } from '@/lib/asset';
+import { getDownloads, type DownloadEntry } from '@/lib/downloads';
 
-const REPO_URL = 'https://github.com/xavierbasc/artillery-tank-app';
-const BUILD_LINES = [
-  'git clone ' + REPO_URL + '.git',
-  'cd artillery-tank-app',
-  'cmake -B build -DCMAKE_BUILD_TYPE=Release',
-  'cmake --build build -j8',
-];
+// Server component — file sizes below are stat()'d from web/public/downloads/
+// at build time (see lib/downloads.ts). No invented numbers: a platform with
+// no binary in that folder yet just shows no size, not a guess.
 
-const notes = [
-  'SDL3 is fetched and built automatically via CMake FetchContent if it isn’t already on your system — no separate SDK install.',
-  'CMake 3.20+ and a C++20 compiler are the only hard requirements. No IDE, no account, no license key.',
-  'Windows, macOS and Linux build from the same CMakeLists.txt; iOS and Android have their own toolchain branches in the same tree.',
-];
+const ICONS: Record<string, typeof Apple> = {
+  macos: Apple,
+  windows: AppWindow,
+  linux: Terminal,
+  android: Smartphone,
+};
+
+const GATEKEEPER_NOTE =
+  'This build is signed ad-hoc, not notarised by Apple. On the first launch, macOS Gatekeeper will refuse a normal double-click — right-click (or Control-click) the app, choose "Open", then confirm in the dialog that appears. You only need to do this once.';
+
+const SMARTSCREEN_NOTE =
+  'The .exe isn’t signed with a code-signing certificate, so Windows SmartScreen will flag it as unrecognised. Click "More info", then "Run anyway" to launch it.';
+
+function Card({ entry }: { entry: DownloadEntry }) {
+  const Icon = ICONS[entry.id] ?? DownloadIcon;
+  const warning =
+    entry.id === 'macos' ? GATEKEEPER_NOTE : entry.id === 'windows' ? SMARTSCREEN_NOTE : null;
+
+  return (
+    <div className="relative flex flex-col bg-panel border border-line clip-angled-sm overflow-hidden">
+      <div className="flex items-center gap-3 px-5 py-4 border-b border-line bg-panel-2">
+        <Icon size={20} className="text-amber-2 flex-shrink-0" />
+        <div className="min-w-0">
+          <div className="font-display text-base text-cream uppercase tracking-wide">{entry.platform}</div>
+          <div className="font-mono text-[11px] text-muted truncate">{entry.requirement}</div>
+        </div>
+      </div>
+
+      <div className="flex-1 flex flex-col justify-between p-5 gap-4">
+        {warning && (
+          <div className="flex gap-2 font-mono text-[11px] text-muted-2 leading-relaxed bg-bg/50 border border-line px-3 py-2.5">
+            <TriangleAlert size={26} className="text-amber-2 flex-shrink-0 mt-0.5" />
+            <span className="text-ink/90">{warning}</span>
+          </div>
+        )}
+
+        <div className="flex items-center justify-between gap-3 mt-auto">
+          <span className="font-mono text-xs text-muted-2 tracking-wide">
+            {entry.sizeLabel ?? '—'}
+          </span>
+          <a
+            href={asset(entry.path)}
+            download
+            aria-label={`Download TerraShell Fracture for ${entry.platform}`}
+            className="inline-flex items-center gap-2 font-mono text-xs font-bold text-bg bg-amber-2 border-2 border-amber-2 px-4 py-2 clip-angled-sm hover:bg-cream hover:border-cream transition-colors duration-200 no-underline"
+          >
+            <DownloadIcon size={14} />
+            {'.' + entry.filename.split('.').slice(1).join('.').toUpperCase()}
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Download() {
-  const [copied, setCopied] = useState(false);
-  const cmd = BUILD_LINES.join('\n');
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(cmd);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
-    } catch {
-      /* clipboard unavailable — silently ignore */
-    }
-  };
+  const downloads = getDownloads();
 
   return (
     <section id="download" className="relative py-24 md:py-28 px-6 bg-bg overflow-hidden">
@@ -41,86 +74,40 @@ export default function Download() {
       </div>
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
-      <div className="relative max-w-3xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
+      <div className="relative max-w-4xl mx-auto text-center">
+        <div className="mb-12">
           <div className="inline-block font-mono text-xs text-amber-2 border border-amber/40 px-4 py-1.5 mb-4 tracking-widest">
-            SOURCE, NOT STORE
+            OFFICIAL BUILDS
           </div>
           <h2 className="font-display text-2xl md:text-4xl text-cream tracking-tight uppercase mb-4">
-            Build It Yourself
+            Download TerraShell Fracture
           </h2>
-          <p className="font-mono text-sm text-muted max-w-lg mx-auto leading-relaxed">
-            There is no store page and no prebuilt installer — this is a source
-            repository you compile locally, the same way the game itself
-            never phones home once it&apos;s running.
+          <p className="font-mono text-sm text-muted max-w-xl mx-auto leading-relaxed">
+            Prebuilt, ready-to-run binaries — pick your platform below.
+            Everything runs fully offline once it&apos;s on your machine, exactly
+            like the rest of the game.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-panel border border-line clip-angled overflow-hidden text-left mb-10"
-        >
-          <div className="flex items-center justify-between gap-3 px-5 py-3 bg-panel-2 border-b border-line">
-            <div className="flex items-center gap-2 min-w-0">
-              <Terminal size={14} className="text-amber-2 flex-shrink-0" />
-              <span className="font-mono text-xs text-muted tracking-widest truncate">BUILD.SH</span>
-            </div>
-            <button
-              onClick={copy}
-              className="flex-shrink-0 flex items-center gap-2 font-mono text-xs text-cream border border-line-2 px-3 py-1.5 hover:border-amber/60 hover:text-amber-2 transition-colors"
-              aria-label="Copy build commands"
-            >
-              {copied ? <Check size={13} className="text-teal-2" /> : <Copy size={13} />}
-              {copied ? 'Copied' : 'Copy'}
-            </button>
-          </div>
-          <pre className="p-5 md:p-6 font-mono text-xs md:text-sm text-ink leading-relaxed overflow-x-auto">
-{BUILD_LINES.map((l, i) => (
-  <div key={i}>
-    <span className="text-amber-2">$ </span>
-    <span>{l}</span>
-  </div>
-))}
-          </pre>
-        </motion.div>
-
-        <motion.ul
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-left space-y-2 mb-12 max-w-xl mx-auto"
-        >
-          {notes.map((n) => (
-            <li key={n} className="font-mono text-xs text-muted leading-relaxed flex gap-2">
-              <span className="text-amber-2 flex-shrink-0">›</span>
-              {n}
-            </li>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 text-left">
+          {downloads.map((entry) => (
+            <Card key={entry.id} entry={entry} />
           ))}
-        </motion.ul>
+        </div>
 
-        <motion.a
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.25 }}
-          href={REPO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 font-mono text-sm font-bold text-bg bg-amber-2 border-2 border-amber-2 px-7 py-3 clip-angled hover:bg-cream hover:border-cream transition-colors duration-200 no-underline"
-        >
-          <Github size={16} />
-          VIEW SOURCE ON GITHUB
-        </motion.a>
+        <div className="flex items-start gap-2.5 max-w-xl mx-auto text-left font-mono text-xs text-muted leading-relaxed">
+          <Lock size={14} className="text-muted-2 flex-shrink-0 mt-0.5" />
+          <span>
+            The source lives in a private repository, so there&apos;s no public
+            code to browse or clone right now — what&apos;s here are the
+            compiled binaries themselves, free to download and keep.
+          </span>
+        </div>
+
+        <div className="flex items-center justify-center gap-2 mt-6 font-mono text-[11px] text-muted-2">
+          <MousePointerClick size={12} />
+          <span>Having trouble opening a downloaded build? See the platform notes above.</span>
+        </div>
       </div>
     </section>
   );

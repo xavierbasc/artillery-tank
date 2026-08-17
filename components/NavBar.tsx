@@ -60,7 +60,7 @@ export default function NavBar() {
           href="#download"
           className="hidden lg:flex items-center gap-2 font-mono text-xs text-amber-2 border border-amber/40 px-4 py-2 clip-angled-sm hover:bg-amber/10 hover:border-amber transition-all duration-200"
         >
-          BUILD &amp; RUN
+          DOWNLOAD
         </a>
 
         {/* Mobile burger */}
@@ -102,7 +102,7 @@ export default function NavBar() {
                   onClick={() => setOpen(false)}
                   className="font-mono text-sm text-amber-2 border border-amber/40 px-4 py-2 inline-block"
                 >
-                  BUILD &amp; RUN
+                  DOWNLOAD
                 </a>
               </li>
             </ul>

@@ -82,7 +82,7 @@ export default function Hero() {
             href="#download"
             className="font-mono text-sm font-bold text-bg bg-amber-2 border-2 border-amber-2 px-7 py-3 clip-angled hover:bg-cream hover:border-cream transition-colors duration-200 no-underline animate-pulse-amber"
           >
-            BUILD IT YOURSELF →
+            DOWNLOAD NOW →
           </a>
           <a
             href="#arena"

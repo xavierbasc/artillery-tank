@@ -1,7 +1,3 @@
-import { Github } from 'lucide-react';
-
-const CODE_REPO = 'https://github.com/xavierbasc/artillery-tank-app';
-
 export default function Footer() {
   return (
     <footer className="bg-bg border-t border-line px-6 py-10">
@@ -17,12 +13,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-6" aria-label="Footer">
           {[
-            ['Gallery',  '#arena'],
-            ['Arsenal',  '#arsenal'],
-            ['Offline',  '#offline'],
-            ['Build',    '#download'],
+            ['Gallery',   '#arena'],
+            ['Arsenal',   '#arsenal'],
+            ['Offline',   '#offline'],
+            ['Download',  '#download'],
           ].map(([label, href]) => (
             <a
               key={label}
@@ -32,15 +28,6 @@ export default function Footer() {
               {label}
             </a>
           ))}
-          <a
-            href={CODE_REPO}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted hover:text-amber-2 transition-colors"
-            aria-label="Source code on GitHub"
-          >
-            <Github size={16} />
-          </a>
         </nav>
       </div>
     </footer>
