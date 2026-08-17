@@ -46,15 +46,28 @@ function Card({ entry }: { entry: DownloadEntry }) {
           <span className="font-mono text-xs text-muted-2 tracking-wide">
             {entry.sizeLabel ?? '—'}
           </span>
-          <a
-            href={asset(entry.path)}
-            download
-            aria-label={`Download TerraShell Fracture for ${entry.platform}`}
-            className="inline-flex items-center gap-2 font-mono text-xs font-bold text-bg bg-amber-2 border-2 border-amber-2 px-4 py-2 clip-angled-sm hover:bg-cream hover:border-cream transition-colors duration-200 no-underline"
-          >
-            <DownloadIcon size={14} />
-            {'.' + entry.filename.split('.').slice(1).join('.').toUpperCase()}
-          </a>
+          {/* A build that isn't in public/downloads/ yet must not ship a live
+              link — that would be a 404 on the one button people came for. */}
+          {entry.available ? (
+            <a
+              href={asset(entry.path)}
+              download
+              aria-label={`Download TerraShell Fracture for ${entry.platform}`}
+              className="inline-flex items-center gap-2 font-mono text-xs font-bold text-bg bg-amber-2 border-2 border-amber-2 px-4 py-2 clip-angled-sm hover:bg-cream hover:border-cream transition-colors duration-200 no-underline"
+            >
+              <DownloadIcon size={14} />
+              {'.' + entry.filename.split('.').slice(1).join('.').toUpperCase()}
+            </a>
+          ) : (
+            <span
+              aria-disabled="true"
+              title={`No ${entry.platform} build published yet`}
+              className="inline-flex items-center gap-2 font-mono text-xs font-bold text-muted-2 bg-transparent border-2 border-line px-4 py-2 clip-angled-sm cursor-not-allowed select-none"
+            >
+              <DownloadIcon size={14} />
+              SOON
+            </span>
+          )}
         </div>
       </div>
     </div>

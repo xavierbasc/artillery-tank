@@ -1,3 +1,7 @@
 .next/
 out/
 node_modules/
+
+# El APK publicado es un entregable, no un artefacto de build: el .gitignore
+# raíz excluye *.apk globalmente y aquí hay que reincluirlo.
+!public/downloads/*.apk
