@@ -108,6 +108,25 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 
    Tune per instance with --cut-edge (border colour), --cut-fill (interior)
    and --cut-w (border width). */
+.cut-lg {
+  --cut: 14px;
+  --cut-w: 2px;
+  position: relative;
+  isolation: isolate;
+  background: var(--cut-edge, var(--line));
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut),
+                     100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+.cut-lg::before {
+  --cut-in: calc(var(--cut) - var(--cut-w));
+  content: '';
+  position: absolute;
+  inset: var(--cut-w);
+  z-index: -1;
+  background: var(--cut-fill, transparent);
+  clip-path: polygon(0 0, calc(100% - var(--cut-in)) 0, 100% var(--cut-in),
+                     100% 100%, var(--cut-in) 100%, 0 calc(100% - var(--cut-in)));
+}
 .cut-sm {
   --cut: 8px;
   --cut-w: 2px;

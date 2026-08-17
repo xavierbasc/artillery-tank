@@ -58,7 +58,7 @@ export default function NavBar() {
         {/* CTA */}
         <a
           href="#download"
-          className="hidden lg:flex items-center gap-2 font-mono text-xs text-amber-2 border border-amber/40 px-4 py-2 clip-angled-sm hover:bg-amber/10 hover:border-amber transition-all duration-200"
+          className="hidden lg:flex items-center gap-2 cut-sm [--cut-w:1px] [--cut-edge:var(--amber-dim)] [--cut-fill:var(--bg)] hover:[--cut-edge:var(--amber)] font-mono text-xs text-amber-2 px-4 py-2 transition-all duration-200"
         >
           DOWNLOAD
         </a>

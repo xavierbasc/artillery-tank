@@ -80,13 +80,13 @@ export default function Hero() {
         >
           <a
             href="#download"
-            className="font-mono text-sm font-bold text-bg bg-amber-2 border-2 border-amber-2 px-7 py-3 clip-angled hover:bg-cream hover:border-cream transition-colors duration-200 no-underline animate-pulse-amber"
+            className="cut-lg [--cut-edge:var(--amber-2)] [--cut-fill:var(--amber-2)] hover:[--cut-edge:var(--cream)] hover:[--cut-fill:var(--cream)] font-mono text-sm font-bold text-bg px-7 py-3 transition-colors duration-200 no-underline animate-pulse-amber"
           >
             DOWNLOAD NOW →
           </a>
           <a
             href="#arena"
-            className="font-mono text-sm text-cream border-2 border-line-2 px-7 py-3 clip-angled hover:border-amber/60 hover:text-amber-2 transition-colors duration-200 no-underline"
+            className="cut-lg [--cut-edge:var(--line-2)] [--cut-fill:var(--bg)] hover:[--cut-edge:var(--amber)] font-mono text-sm text-cream px-7 py-3 hover:text-amber-2 transition-colors duration-200 no-underline"
           >
             SEE SCREENSHOTS
           </a>
