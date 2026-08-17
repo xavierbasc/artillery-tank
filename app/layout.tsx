@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     type: 'website',
     url: SITE_URL,
     siteName: 'TerraShell Fracture',
-    images: [{ url: '/shots/gameplay.png', width: 1280, height: 720, alt: 'TerraShell Fracture gameplay' }],
+    images: [{ url: 'shots/gameplay.png', width: 1280, height: 720, alt: 'TerraShell Fracture gameplay' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'TerraShell Fracture',
     description: 'Turn-based artillery warfare with fully destructible terrain. 100% offline.',
-    images: ['/shots/gameplay.png'],
+    images: ['shots/gameplay.png'],
   },
 };
 

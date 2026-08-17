@@ -35,7 +35,7 @@ function BlastBar({ value }: { value: number }) {
 
 export default function Terrains() {
   return (
-    <section className="relative py-24 px-6 bg-bg-2">
+    <section id="terrains" className="relative py-24 px-6 bg-bg-2">
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
       <div className="relative max-w-5xl mx-auto">
         <motion.div

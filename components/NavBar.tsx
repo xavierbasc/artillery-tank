@@ -8,6 +8,7 @@ const links = [
   { label: 'Worlds',    href: '#scenarios' },
   { label: 'Arsenal',   href: '#arsenal' },
   { label: 'Offline',   href: '#offline' },
+  { label: 'Share',     href: '#share' },
   { label: 'Controls',  href: '#controls' },
   { label: 'Tech',      href: '#specs' },
 ];
@@ -41,7 +42,7 @@ export default function NavBar() {
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden lg:flex items-center gap-6">
           {links.map(l => (
             <li key={l.href}>
               <a
@@ -57,7 +58,7 @@ export default function NavBar() {
         {/* CTA */}
         <a
           href="#download"
-          className="hidden md:flex items-center gap-2 font-mono text-xs text-amber-2 border border-amber/40 px-4 py-2 clip-angled-sm hover:bg-amber/10 hover:border-amber transition-all duration-200"
+          className="hidden lg:flex items-center gap-2 font-mono text-xs text-amber-2 border border-amber/40 px-4 py-2 clip-angled-sm hover:bg-amber/10 hover:border-amber transition-all duration-200"
         >
           BUILD &amp; RUN
         </a>
@@ -65,7 +66,7 @@ export default function NavBar() {
         {/* Mobile burger */}
         <button
           onClick={() => setOpen(o => !o)}
-          className="md:hidden text-amber-2 p-1"
+          className="lg:hidden text-amber-2 p-1"
           aria-label="Toggle menu"
           aria-expanded={open}
         >
@@ -81,7 +82,7 @@ export default function NavBar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-bg-2 border-b border-line overflow-hidden"
+            className="lg:hidden bg-bg-2 border-b border-line overflow-hidden"
           >
             <ul className="px-6 py-4 flex flex-col gap-4">
               {links.map(l => (
