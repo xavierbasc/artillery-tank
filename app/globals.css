@@ -94,6 +94,40 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
 }
 
+/* ── Angled corners WITH a border that follows the chamfer ─────────────────
+   `clip-path` clips the box but cannot stroke its own diagonal edge, so
+   `border` + `clip-angled` loses the outline on exactly the two cut corners
+   and they read as unfinished. Here the element's own background is the
+   border, and an inset pseudo-element supplies the fill, clipped to a chamfer
+   shrunk by the border width.
+
+   The fill sits at z-index -1 inside an isolated stacking context: that paints
+   it above the element's background (the border) but below the element's own
+   inline content, so labels and icons stay legible without needing a wrapper
+   span around them.
+
+   Tune per instance with --cut-edge (border colour), --cut-fill (interior)
+   and --cut-w (border width). */
+.cut-sm {
+  --cut: 8px;
+  --cut-w: 2px;
+  position: relative;
+  isolation: isolate;
+  background: var(--cut-edge, var(--line));
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut),
+                     100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+.cut-sm::before {
+  --cut-in: calc(var(--cut) - var(--cut-w));
+  content: '';
+  position: absolute;
+  inset: var(--cut-w);
+  z-index: -1;
+  background: var(--cut-fill, transparent);
+  clip-path: polygon(0 0, calc(100% - var(--cut-in)) 0, 100% var(--cut-in),
+                     100% 100%, var(--cut-in) 100%, 0 calc(100% - var(--cut-in)));
+}
+
 /* ── Steel plate: bevelled panel with TL highlight / BR shadow ─────────── */
 .plate {
   background: var(--panel);

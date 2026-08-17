@@ -53,7 +53,7 @@ function Card({ entry }: { entry: DownloadEntry }) {
               href={asset(entry.path)}
               download
               aria-label={`Download TerraShell Fracture for ${entry.platform}`}
-              className="inline-flex items-center gap-2 font-mono text-xs font-bold text-bg bg-amber-2 border-2 border-amber-2 px-4 py-2 clip-angled-sm hover:bg-cream hover:border-cream transition-colors duration-200 no-underline"
+              className="cut-sm [--cut-edge:var(--amber-2)] [--cut-fill:var(--amber-2)] hover:[--cut-edge:var(--cream)] hover:[--cut-fill:var(--cream)] inline-flex items-center gap-2 font-mono text-xs font-bold text-bg px-4 py-2 transition-colors duration-200 no-underline"
             >
               <DownloadIcon size={14} />
               {'.' + entry.filename.split('.').slice(1).join('.').toUpperCase()}
@@ -62,7 +62,7 @@ function Card({ entry }: { entry: DownloadEntry }) {
             <span
               aria-disabled="true"
               title={`No ${entry.platform} build published yet`}
-              className="inline-flex items-center gap-2 font-mono text-xs font-bold text-muted-2 bg-transparent border-2 border-line px-4 py-2 clip-angled-sm cursor-not-allowed select-none"
+              className="cut-sm [--cut-edge:var(--line-2)] [--cut-fill:var(--panel)] inline-flex items-center gap-2 font-mono text-xs font-bold text-muted-2 px-4 py-2 cursor-not-allowed select-none"
             >
               <DownloadIcon size={14} />
               SOON
