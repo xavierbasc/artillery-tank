@@ -4,6 +4,7 @@ import Ticker      from '@/components/Ticker';
 import Screenshots from '@/components/Screenshots';
 import Mechanics   from '@/components/Mechanics';
 import Scenarios   from '@/components/Scenarios';
+import Battlefields from '@/components/Battlefields';
 import Arsenal     from '@/components/Arsenal';
 import Terrains    from '@/components/Terrains';
 import Offline     from '@/components/Offline';
@@ -68,6 +69,7 @@ export default function Home() {
         <Screenshots />
         <Mechanics />
         <Scenarios />
+        <Battlefields />
         <Arsenal />
         <Terrains />
         <Offline />
