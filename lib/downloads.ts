@@ -19,10 +19,11 @@ export interface DownloadEntry {
 }
 
 const CATALOG: Array<Pick<DownloadEntry, 'id' | 'platform' | 'filename' | 'requirement'>> = [
-  { id: 'macos',   platform: 'macOS',   filename: 'TerraShellFracture-macOS.zip',   requirement: 'macOS · Apple Silicon & Intel' },
-  { id: 'windows', platform: 'Windows', filename: 'TerraShellFracture-Windows.zip', requirement: 'Windows 10/11 · 64-bit' },
-  { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux.tar.gz', requirement: 'Linux · x86-64' },
-  { id: 'android', platform: 'Android', filename: 'TerraShellFracture-Android.apk', requirement: 'Android 7.0+ · arm64' },
+  { id: 'macos',   platform: 'macOS',   filename: 'TerraShellFracture-macOS.dmg',          requirement: 'macOS · Apple Silicon & Intel · disk image' },
+  { id: 'windows', platform: 'Windows', filename: 'TerraShellFracture-Windows-Setup.exe',  requirement: 'Windows 10/11 · 64-bit · installer' },
+  { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux-amd64.deb',    requirement: 'Debian/Ubuntu · x86-64 · .deb package' },
+  { id: 'linuxtar',platform: 'Linux (portable)', filename: 'TerraShellFracture-Linux.tar.gz', requirement: 'Any distro · x86-64 · unpack and run' },
+  { id: 'android', platform: 'Android', filename: 'TerraShellFracture-Android.apk',        requirement: 'Android 7.0+ · arm64' },
 ];
 
 function formatSize(bytes: number): string {

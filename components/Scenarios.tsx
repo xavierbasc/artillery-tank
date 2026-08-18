@@ -39,6 +39,7 @@ const skies = [
   { name: 'Mars Dust',      grad: ['#3a1f14', '#a85a2c'] },
   { name: 'Ash Storm',      grad: ['#1c1a18', '#544c44'] },
   { name: 'Overcast Steel', grad: ['#242a30', '#5a636c'] },
+  { name: 'Apocalypse',     grad: ['#0a060a', '#e06024'] },
 ];
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
@@ -121,7 +122,7 @@ export default function Scenarios() {
           transition={{ duration: 0.5 }}
         >
           <h3 className="font-mono text-xs text-teal-2 tracking-widest text-center mb-6">
-            8 SKY ARCHETYPES — PICKED BY BIOME, LAYERED WITH PARALLAX &amp; ATMOSPHERE
+            9 SKY ARCHETYPES — PICKED BY BIOME, LAYERED WITH PARALLAX &amp; ATMOSPHERE
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
             {skies.map(s => (
@@ -139,6 +140,10 @@ export default function Scenarios() {
             props and an animated atmosphere pass from the same random seed as
             the terrain — so the scene always agrees with itself, and the
             silhouette, palette and weather change on every single level.
+            The horizon can be a lit night-time skyline with windows switching
+            on and off and roof beacons blinking out of phase, a dead forest of
+            burnt trunks, or a burning apocalypse sky raining meteors behind the
+            parallax over the volcanic and rock biomes.
           </p>
         </motion.div>
       </div>

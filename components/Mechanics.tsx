@@ -14,7 +14,7 @@ const cards = [
   {
     icon: Layers,
     title: 'Layered Explosions',
-    desc: '2,048-particle pool driving 6 blending layers per hit — white flash, inner pulse, a double-layered shockwave ring, physics debris, rising embers and smoke — sized per weapon so a Baby Missile and a Nuke never look alike. Every blast also leaves a persistent scorch decal on the ground.',
+    desc: '2,048-particle pool driving 6 blending layers per hit — white flash, inner pulse, a double-layered shockwave ring, physics debris, rising embers and smoke — sized per weapon so a Baby Missile and a Nuke never look alike. Every blast also leaves a persistent scorch decal on the ground, and the chunks it throws come to rest as rubble that stays planted on the surface — even after a later shell reshapes the hill beneath it.',
     accent: '#ff5b3d',
     span: 'col-span-1',
   },
@@ -28,7 +28,7 @@ const cards = [
   {
     icon: CloudLightning,
     title: 'Storms & Lightning',
-    desc: 'Overcast, fog, rain, red-sky, moonless night and full thunderstorms — clouds drift with the wind, rain slants with it, and storm bolts strike tanks directly for real damage.',
+    desc: 'Overcast, fog, rain, red-sky, moonless night and full thunderstorms — clouds drift with the wind, rain slants with it, and a storm bolt hits like a shell: it breaks a shield outright, and an unshielded tank goes up with the full death sequence.',
     accent: '#5fd6c6',
     span: 'col-span-1',
   },

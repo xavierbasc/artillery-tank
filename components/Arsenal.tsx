@@ -180,6 +180,10 @@ export default function Arsenal() {
           </div>
           <h2 className="font-display text-2xl md:text-4xl text-cream tracking-tight uppercase">Arsenal</h2>
           <p className="font-mono text-sm text-muted mt-3">All 7 weapons, real numbers — select one to inspect</p>
+          <p className="font-mono text-xs text-muted-2 mt-2">
+            In game, each one gets a rotating wireframe model and a dossier
+            typed out live on a green phosphor CRT — scanlines, glow and all
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">

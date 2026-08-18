@@ -12,10 +12,10 @@ const specs = [
   { label: 'audio',      value: 'synth + MOD',           note: 'square/noise SFX generated live, libxmp tracker music' },
   { label: 'terrain',    value: '9 shapes x 8 biomes',   note: 'midpoint displacement, deformed by every shot' },
   { label: 'particles',  value: '2048 pool',             note: '6 blended explosion layers, zero per-frame alloc' },
-  { label: 'sky',        value: '8 archetypes',          note: 'procedural gradient + celestial body + 3-layer parallax' },
+  { label: 'sky',        value: '9 archetypes',          note: 'gradient + celestial body + 3-layer parallax, meteors over dead biomes' },
   { label: 'weather',    value: '6 conditions',          note: 'overcast, fog, rain, red sky, storm, moonless night' },
   { label: 'shields',    value: '72-point arc',          note: 'terrain-clipped, 40hp, cyan to red as it degrades' },
-  { label: 'multiplayer',value: 'up to 10 tanks',        note: 'local only — keyboard, mouse and touch, no netcode' },
+  { label: 'multiplayer',value: '2 to 6 tanks',          note: 'local only — keyboard, mouse and touch, no netcode' },
   { label: 'platforms',  value: '5 targets',             note: 'windows, macos, linux, ios, android — one CMake tree' },
 ];
 

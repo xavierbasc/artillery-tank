@@ -10,19 +10,29 @@ const ICONS: Record<string, typeof Apple> = {
   macos: Apple,
   windows: AppWindow,
   linux: Terminal,
+  linuxtar: Terminal,
   android: Smartphone,
 };
 
 const GATEKEEPER_NOTE =
-  'This build is signed ad-hoc, not notarised by Apple. On the first launch, macOS Gatekeeper will refuse a normal double-click — right-click (or Control-click) the app, choose "Open", then confirm in the dialog that appears. You only need to do this once.';
+  'Open the disk image and drag the app into Applications. The build is signed ad-hoc, not notarised by Apple, so the first launch needs a right-click (or Control-click) on the app, then "Open" and confirm — once only.';
 
 const SMARTSCREEN_NOTE =
-  'The .exe isn’t signed with a code-signing certificate, so Windows SmartScreen will flag it as unrecognised. Click "More info", then "Run anyway" to launch it.';
+  'The installer isn’t signed with a code-signing certificate, so Windows SmartScreen will flag it as unrecognised. Click "More info", then "Run anyway". It installs to Program Files with Start-menu and desktop shortcuts, and uninstalls from Settings › Apps.';
+
+const DEB_NOTE =
+  'Install with "sudo apt install ./TerraShellFracture-Linux-amd64.deb". It drops the game in /opt, puts a terrashell-fracture launcher on PATH and adds a desktop entry. Built against Debian 12, so it also runs on newer Ubuntu and derivatives.';
+
+const TARBALL_NOTE =
+  'For distros that don’t use .deb: unpack anywhere and run ./TerraShellFracture from inside the folder — it reads its music from the assets/ directory next to the binary.';
 
 function Card({ entry }: { entry: DownloadEntry }) {
   const Icon = ICONS[entry.id] ?? DownloadIcon;
   const warning =
-    entry.id === 'macos' ? GATEKEEPER_NOTE : entry.id === 'windows' ? SMARTSCREEN_NOTE : null;
+    entry.id === 'macos'    ? GATEKEEPER_NOTE  :
+    entry.id === 'windows'  ? SMARTSCREEN_NOTE :
+    entry.id === 'linux'    ? DEB_NOTE         :
+    entry.id === 'linuxtar' ? TARBALL_NOTE     : null;
 
   return (
     <div className="relative flex flex-col bg-panel border border-line clip-angled-sm overflow-hidden">
