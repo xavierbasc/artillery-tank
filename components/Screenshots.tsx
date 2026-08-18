@@ -40,6 +40,48 @@ const shots = [
     accent: '#c2321f',
     span: 'col-span-1',
   },
+  {
+    src: '/shots/weaponselect.png',
+    title: 'Arm Up',
+    desc: 'Pre-match loadout — every player spends their opening credits',
+    accent: '#2ea89a',
+    span: 'col-span-1',
+  },
+  {
+    src: '/shots/options.png',
+    title: 'Settings',
+    desc: 'Audio and display, on glass panels over the live menu scene',
+    accent: '#5fd6c6',
+    span: 'col-span-1',
+  },
+  {
+    src: '/shots/pause.png',
+    title: 'Pause',
+    desc: 'Resume, bail to the menu or quit — without losing the round',
+    accent: '#d69a1f',
+    span: 'col-span-1',
+  },
+  {
+    src: '/shots/gameover.png',
+    title: 'Match Debrief',
+    desc: 'Rounds, shots, accuracy, damage, kills and best hit, then your rank',
+    accent: '#ffb92e',
+    span: 'col-span-1 md:col-span-2',
+  },
+  {
+    src: '/shots/highscores.png',
+    title: 'High Scores',
+    desc: 'Local table and rivals — share codes typed in on an on-screen keypad',
+    accent: '#c2321f',
+    span: 'col-span-1',
+  },
+  {
+    src: '/shots/credits.png',
+    title: 'Credits',
+    desc: 'A shell arcs across the starfield as the roll climbs',
+    accent: '#5fd6c6',
+    span: 'col-span-1',
+  },
 ];
 
 const container = {
