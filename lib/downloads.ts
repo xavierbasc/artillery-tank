@@ -24,6 +24,10 @@ const CATALOG: Array<Pick<DownloadEntry, 'id' | 'platform' | 'filename' | 'requi
   { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux-amd64.deb',    requirement: 'Debian/Ubuntu · x86-64 · .deb package' },
   { id: 'linuxtar',platform: 'Linux (portable)', filename: 'TerraShellFracture-Linux.tar.gz', requirement: 'Any distro · x86-64 · unpack and run' },
   { id: 'android', platform: 'Android', filename: 'TerraShellFracture-Android.apk',        requirement: 'Android 7.0+ · arm64' },
+  // iOS has no downloadable artefact by design — Apple only installs apps from
+  // the App Store or TestFlight, so this card never has a file to stat and
+  // always renders in its unavailable state with the note explaining why.
+  { id: 'ios',     platform: 'iOS',     filename: 'TerraShellFracture-iOS.ipa',            requirement: 'iPhone · App Store submission pending' },
 ];
 
 function formatSize(bytes: number): string {

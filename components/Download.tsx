@@ -8,6 +8,7 @@ import { getDownloads, type DownloadEntry } from '@/lib/downloads';
 
 const ICONS: Record<string, typeof Apple> = {
   macos: Apple,
+  ios: Smartphone,
   windows: AppWindow,
   linux: Terminal,
   linuxtar: Terminal,
@@ -23,6 +24,9 @@ const SMARTSCREEN_NOTE =
 const DEB_NOTE =
   'Install with "sudo apt install ./TerraShellFracture-Linux-amd64.deb". It drops the game in /opt, puts a terrashell-fracture launcher on PATH and adds a desktop entry. Built against Debian 12, so it also runs on newer Ubuntu and derivatives.';
 
+const IOS_NOTE =
+  'iOS can only install apps through the App Store or TestFlight — a downloadable build isn’t something Apple allows a website to hand out. The iPhone version is built and signed; the App Store listing is still being prepared, and this card turns into a store link once it’s live.';
+
 const TARBALL_NOTE =
   'For distros that don’t use .deb: unpack anywhere and run ./TerraShellFracture from inside the folder — it reads its music from the assets/ directory next to the binary.';
 
@@ -32,7 +36,8 @@ function Card({ entry }: { entry: DownloadEntry }) {
     entry.id === 'macos'    ? GATEKEEPER_NOTE  :
     entry.id === 'windows'  ? SMARTSCREEN_NOTE :
     entry.id === 'linux'    ? DEB_NOTE         :
-    entry.id === 'linuxtar' ? TARBALL_NOTE     : null;
+    entry.id === 'linuxtar' ? TARBALL_NOTE     :
+    entry.id === 'ios'      ? IOS_NOTE         : null;
 
   return (
     <div className="relative flex flex-col bg-panel border border-line clip-angled-sm overflow-hidden">
