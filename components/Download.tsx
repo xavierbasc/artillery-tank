@@ -1,4 +1,4 @@
-import { Apple, AppWindow, Terminal, Smartphone, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
+import { Apple, AppWindow, Terminal, Smartphone, Store, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
 import { asset } from '@/lib/asset';
 import { getDownloads, type DownloadEntry } from '@/lib/downloads';
 
@@ -15,9 +15,6 @@ const ICONS: Record<string, typeof Apple> = {
   android: Smartphone,
 };
 
-const GATEKEEPER_NOTE =
-  'Open the disk image and drag the app into Applications. The build is signed ad-hoc, not notarised by Apple, so the first launch needs a right-click (or Control-click) on the app, then "Open" and confirm — once only.';
-
 const SMARTSCREEN_NOTE =
   'The installer isn’t signed with a code-signing certificate, so Windows SmartScreen will flag it as unrecognised. Click "More info", then "Run anyway". It installs to Program Files with Start-menu and desktop shortcuts, and uninstalls from Settings › Apps.';
 
@@ -25,7 +22,13 @@ const DEB_NOTE =
   'Install with "sudo apt install ./TerraShellFracture-Linux-amd64.deb". It drops the game in /opt, puts a terrashell-fracture launcher on PATH and adds a desktop entry. Built against Debian 12, so it also runs on newer Ubuntu and derivatives.';
 
 const IOS_NOTE =
-  'iOS can only install apps through the App Store or TestFlight — a downloadable build isn’t something Apple allows a website to hand out. The iPhone version is built and signed; the App Store listing is still being prepared, and this card turns into a store link once it’s live.';
+  'iOS can only install apps through the App Store or TestFlight — a downloadable build isn’t something Apple allows a website to hand out. The iPhone build is finished and signed; it ships as soon as the listing clears review.';
+
+const MACOS_NOTE =
+  'The macOS build is finished and signed; it arrives on the Mac App Store as soon as the listing clears review.';
+
+const ANDROID_NOTE =
+  'The Android build is finished and signed; it arrives on Google Play as soon as the listing clears review.';
 
 const TARBALL_NOTE =
   'For distros that don’t use .deb: unpack anywhere and run ./TerraShellFracture from inside the folder — it reads its music from the assets/ directory next to the binary.';
@@ -33,10 +36,11 @@ const TARBALL_NOTE =
 function Card({ entry }: { entry: DownloadEntry }) {
   const Icon = ICONS[entry.id] ?? DownloadIcon;
   const warning =
-    entry.id === 'macos'    ? GATEKEEPER_NOTE  :
+    entry.id === 'macos'    ? MACOS_NOTE       :
     entry.id === 'windows'  ? SMARTSCREEN_NOTE :
     entry.id === 'linux'    ? DEB_NOTE         :
     entry.id === 'linuxtar' ? TARBALL_NOTE     :
+    entry.id === 'android'  ? ANDROID_NOTE     :
     entry.id === 'ios'      ? IOS_NOTE         : null;
 
   return (
@@ -57,9 +61,16 @@ function Card({ entry }: { entry: DownloadEntry }) {
           </div>
         )}
 
+        {entry.store && (
+          <div className="flex items-center gap-2 font-mono text-[11px] tracking-widest text-amber-2 uppercase">
+            <Store size={13} className="flex-shrink-0" />
+            <span>Coming soon · {entry.store}</span>
+          </div>
+        )}
+
         <div className="flex items-center justify-between gap-3 mt-auto">
           <span className="font-mono text-xs text-muted-2 tracking-wide">
-            {entry.sizeLabel ?? '—'}
+            {entry.available ? entry.sizeLabel : entry.store ? 'Store release' : '—'}
           </span>
           {/* A build that isn't in public/downloads/ yet must not ship a live
               link — that would be a 404 on the one button people came for. */}
@@ -76,7 +87,9 @@ function Card({ entry }: { entry: DownloadEntry }) {
           ) : (
             <span
               aria-disabled="true"
-              title={`No ${entry.platform} build published yet`}
+              title={entry.store
+                ? `${entry.platform} ships through the ${entry.store}`
+                : `No ${entry.platform} build published yet`}
               className="cut-sm [--cut-edge:var(--line-2)] [--cut-fill:var(--panel)] inline-flex items-center gap-2 font-mono text-xs font-bold text-muted-2 px-4 py-2 cursor-not-allowed select-none"
             >
               <DownloadIcon size={14} />
@@ -111,9 +124,11 @@ export default function Download() {
             Download TerraShell Fracture
           </h2>
           <p className="font-mono text-sm text-muted max-w-xl mx-auto leading-relaxed">
-            Prebuilt, ready-to-run binaries — pick your platform below.
-            Everything runs fully offline once it&apos;s on your machine, exactly
-            like the rest of the game.
+            Windows and Linux install straight from here. The macOS, Android and
+            iOS builds are finished and signed, and ship through their own
+            stores — Windows lands on the Microsoft Store too. Everything runs
+            fully offline once it&apos;s on your machine, exactly like the rest
+            of the game.
           </p>
         </div>
 
