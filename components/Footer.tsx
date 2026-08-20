@@ -1,3 +1,5 @@
+import { asset } from '@/lib/asset';
+
 export default function Footer() {
   return (
     <footer className="bg-bg border-t border-line px-6 py-10">
@@ -13,13 +15,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav className="flex items-center gap-6" aria-label="Footer">
+        <nav className="flex items-center flex-wrap justify-center gap-x-6 gap-y-2" aria-label="Footer">
           {[
             ['Gallery',   '#arena'],
             ['Arsenal',   '#arsenal'],
             ['Offline',   '#offline'],
             ['Download',  '#download'],
             ['Tell a friend', '#tell-a-friend'],
+            // Ruta propia, no ancla: las tiendas exigen una URL cuyo contenido
+            // principal sea la política de privacidad.
+            ['Privacy',   asset('/privacy/')],
           ].map(([label, href]) => (
             <a
               key={label}
