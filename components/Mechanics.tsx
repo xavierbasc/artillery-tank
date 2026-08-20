@@ -14,7 +14,7 @@ const cards = [
   {
     icon: Layers,
     title: 'Layered Explosions',
-    desc: '2,048-particle pool driving 6 blending layers per hit — white flash, inner pulse, a double-layered shockwave ring, physics debris, rising embers and smoke — sized per weapon so a Baby Missile and a Nuke never look alike. Every blast also leaves a persistent scorch decal on the ground, and the chunks it throws come to rest as rubble that stays planted on the surface — even after a later shell reshapes the hill beneath it.',
+    desc: '2,048-particle pool driving 6 blending layers per hit — white flash, inner pulse, a double-layered shockwave ring, physics debris, rising embers and smoke — sized per weapon so a Baby Missile and a Nuke never look alike. Blasts run wide and slow enough to watch, over a seven-layer detonation synthesised on the spot: the rip, the punch, shrapnel scattered across the stereo field and two delayed echoes coming back off the terrain. Every blast also leaves a persistent scorch decal on the ground, and the chunks it throws come to rest as rubble that stays planted on the surface — even after a later shell reshapes the hill beneath it.',
     accent: '#ff5b3d',
     span: 'col-span-1',
   },
@@ -42,14 +42,14 @@ const cards = [
   {
     icon: ShoppingCart,
     title: 'Shop & Economy',
-    desc: `Start every match with ${'5,000'} credits, earn ${'300'} more per confirmed hit, spend them between rounds on heavier ordnance — no penalty for a clean miss.`,
+    desc: `Start every match with ${'5,000'} credits and earn ${'300'} more per confirmed hit. The armory has two racks — ordnance on the left, defensive systems on the right — with a rotating 3D model and a dossier typed onto a CRT for whatever you have selected. No penalty for a clean miss.`,
     accent: '#ffb92e',
     span: 'col-span-1',
   },
   {
     icon: Shield,
-    title: 'Energy Shields',
-    desc: 'A 72-point circular energy arc, clipped exactly to the terrain surface so it never shows underground. Absorbs damage first and shifts cyan → orange → red as its 40 HP degrades, with a distinct break sound when it finally shatters.',
+    title: 'Shields & Defence Rack',
+    desc: 'The energy dome is a 72-point arc clipped to the ground, shifting cyan → orange → red as it degrades. Shield cells raise its 40 HP up to 200; an aegis dome widens it and bleeds 20% off every hit; a mag field throws incoming shells back out before they land; reactive plates detonate outward and cancel a hit whole. Whichever system you engage takes the next hit first.',
     accent: '#2ea89a',
     span: 'col-span-1',
   },

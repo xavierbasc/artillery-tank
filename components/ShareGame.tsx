@@ -45,8 +45,10 @@ export default function ShareGame() {
     }
   };
 
+  // id distinto de #share, que ya lo usa la sección de share codes de la tabla
+  // de puntuaciones: dos secciones con el mismo id rompen el ancla del menú.
   return (
-    <section id="share" className="relative py-20 px-6 bg-bg-2 border-t border-line">
+    <section id="tell-a-friend" className="relative py-20 px-6 bg-bg-2 border-t border-line">
       <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
       <div className="relative max-w-3xl mx-auto text-center">
         <div className="inline-block font-mono text-xs text-amber-2 border border-amber/40 px-4 py-1.5 mb-4 tracking-widest">

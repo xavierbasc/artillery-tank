@@ -19,6 +19,7 @@ export default function Footer() {
             ['Arsenal',   '#arsenal'],
             ['Offline',   '#offline'],
             ['Download',  '#download'],
+            ['Tell a friend', '#tell-a-friend'],
           ].map(([label, href]) => (
             <a
               key={label}

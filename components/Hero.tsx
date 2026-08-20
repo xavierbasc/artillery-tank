@@ -4,9 +4,9 @@ import TerrainCanvas from './TerrainCanvas';
 
 const stats: [string, string][] = [
   ['7', 'Weapons'],
+  ['4', 'Defences'],
   ['8', 'Biomes'],
-  ['9', 'Shapes'],
-  ['10', 'Tanks'],
+  ['6', 'Tanks'],
   ['0', 'Servers'],
 ];
 

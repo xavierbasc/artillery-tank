@@ -8,6 +8,8 @@ const keyboardControls = [
   { key: '↑ ↓',    action: 'Adjust shot power' },
   { key: 'Space',  action: 'Fire' },
   { key: 'Tab',    action: 'Cycle weapon' },
+  { key: 'D',      action: 'Cycle the engaged defence system' },
+  { key: 'S',      action: 'Share the game (main menu)' },
   { key: 'Enter',  action: 'Confirm / buy in shop' },
   { key: 'Esc',    action: 'Pause / close shop' },
 ];
@@ -20,9 +22,12 @@ const mouseControls = [
 const touchControls = [
   { key: 'Drag left half',   action: 'Adjust barrel angle' },
   { key: 'Drag right half',  action: 'Adjust shot power' },
-  { key: 'FIRE button',      action: 'Fire — always visible, bottom centre' },
+  { key: 'Pull back from your tank', action: 'Slingshot gesture — angle and power in one drag' },
+  { key: 'FIRE button',      action: 'Fire — bottom-right corner, full bar height' },
+  { key: '◀ icon ▶',         action: 'Change weapon without opening the picker' },
+  { key: 'Defence chip',     action: 'Switch the engaged protection' },
   { key: 'Tap weapon row',   action: 'Buy in shop' },
-  { key: 'II button',        action: 'Pause' },
+  { key: 'QUIT button',      action: 'Leave the match — bottom-left corner' },
 ];
 
 const flow = ['01 · Aim', '02 · Power', '03 · Fire', '04 · Boom', '05 · Shop'];
