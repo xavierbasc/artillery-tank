@@ -22,8 +22,15 @@ const shots = [
   {
     src: '/shots/shop.png',
     title: 'Armory',
-    desc: 'Wireframe 3D datalink, dossier typed onto a phosphor CRT',
+    desc: 'Two racks — ordnance and defensive systems — beside a 3D datalink',
     accent: '#2ea89a',
+    span: 'col-span-1',
+  },
+  {
+    src: '/shots/defense.png',
+    title: 'Defensive Rack',
+    desc: 'Shield cells, mag fields, aegis domes and reactive plates, on a live hologram',
+    accent: '#5fd6c6',
     span: 'col-span-1',
   },
   {

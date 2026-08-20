@@ -23,7 +23,7 @@ const weapons = [
     ),
   },
   {
-    id: 'missile', name: 'Missile', cost: 1875, costLabel: '1,875 CR · ×5 BUNDLE', costColor: '#ffb92e',
+    id: 'missile', name: 'Missile', cost: 450, costLabel: '450 CR · ×5 BUNDLE', costColor: '#ffb92e',
     dmg: 40, rad: 20, bundle: 5, clusters: 0, pen: false, barColor: '#ff8c3c',
     badge: null,
     desc: 'Twice the punch of the Baby Missile for a modest price. The default step up once credits allow it.',
@@ -35,7 +35,7 @@ const weapons = [
     ),
   },
   {
-    id: 'baby_nuke', name: 'Baby Nuke', cost: 10000, costLabel: '10,000 CR · ×3 BUNDLE', costColor: '#ff7a3c',
+    id: 'baby_nuke', name: 'Baby Nuke', cost: 1400, costLabel: '1,400 CR · ×3 BUNDLE', costColor: '#ff7a3c',
     dmg: 65, rad: 40, bundle: 3, clusters: 0, pen: false, barColor: '#ff7a3c',
     badge: 'HEAVY',
     desc: 'A Nuke-class warhead at a third of the blast radius. Serious area damage without committing your whole war chest.',
@@ -51,7 +51,7 @@ const weapons = [
     ),
   },
   {
-    id: 'nuke', name: 'Nuke', cost: 12000, costLabel: '12,000 CR · ×1 BUNDLE', costColor: '#ff2a20',
+    id: 'nuke', name: 'Nuke', cost: 2200, costLabel: '2,200 CR · ×1 BUNDLE', costColor: '#ff2a20',
     dmg: 90, rad: 75, bundle: 1, clusters: 0, pen: false, barColor: '#ff2a20',
     badge: 'DEVASTATOR',
     desc: 'The single highest damage and largest blast radius in the game. Wins the exchange — rewrites the map.',
@@ -76,7 +76,7 @@ const weapons = [
     ),
   },
   {
-    id: 'mirv', name: 'MIRV', cost: 10000, costLabel: '10,000 CR · ×3 BUNDLE', costColor: '#c084fc',
+    id: 'mirv', name: 'MIRV', cost: 1500, costLabel: '1,500 CR · ×3 BUNDLE', costColor: '#c084fc',
     dmg: 35, rad: 15, bundle: 3, clusters: 5, pen: false, barColor: '#c084fc',
     badge: '5-WAY SPLIT',
     desc: 'Splits into 5 sub-shells at the apex of its arc, each detonating independently below. Covers ground a single warhead can’t.',
@@ -100,7 +100,7 @@ const weapons = [
     ),
   },
   {
-    id: 'cluster', name: 'Cluster', cost: 7000, costLabel: '7,000 CR · ×2 BUNDLE', costColor: '#ffd040',
+    id: 'cluster', name: 'Cluster', cost: 1000, costLabel: '1,000 CR · ×2 BUNDLE', costColor: '#ffd040',
     dmg: 20, rad: 7, bundle: 2, clusters: 6, pen: false, barColor: '#ffd040',
     badge: 'AREA DENIAL',
     desc: 'Splits into 6 sub-shells right on impact. Weak per hit, brutal for denying a whole stretch of terrain.',
@@ -124,7 +124,7 @@ const weapons = [
     ),
   },
   {
-    id: 'penetrator', name: 'Penetrator', cost: 2000, costLabel: '2,000 CR · ×5 BUNDLE', costColor: '#60c0ff',
+    id: 'penetrator', name: 'Penetrator', cost: 600, costLabel: '600 CR · ×5 BUNDLE', costColor: '#60c0ff',
     dmg: 50, rad: 11, bundle: 5, clusters: 0, pen: true, barColor: '#1a90ff',
     badge: 'BUNKER BUSTER',
     desc: 'Burrows through terrain before detonating. Defeats enemies hiding behind hills or dug in deep — cheap, too.',
@@ -135,6 +135,32 @@ const weapons = [
         <div className="w-8 h-4 clip-angled" style={{ background: 'linear-gradient(to bottom,#4060a0,#304080)' }} />
       </div>
     ),
+  },
+];
+
+// Real values — src/Core/Constants.h `DEFENSES[]`. The armory's right-hand
+// rack: what a tank buys to survive the next volley instead of winning the
+// last one.
+const defences = [
+  {
+    id: 'shield_cell', name: 'Shield Cell', costLabel: '500 CR · +40 SHIELD',
+    color: '#50d2ff',
+    desc: 'Raises the energy dome\u2019s capacity and tops it back up. Stacks to 200 HP of shield.',
+  },
+  {
+    id: 'mag_field', name: 'Mag Field', costLabel: '900 CR · DEFLECT ×1',
+    color: '#96beff',
+    desc: 'Coil lanes orbiting the hull. A shell that enters the bubble is thrown straight back out — one charge per deflection, three lanes maximum.',
+  },
+  {
+    id: 'aegis_dome', name: 'Aegis Dome', costLabel: '1,200 CR · \u221220% DAMAGE',
+    color: '#78ebdc',
+    desc: 'A wider, faceted shell over the shield. Bleeds 20% off everything that gets through, per tier, up to three tiers.',
+  },
+  {
+    id: 'reactive_armor', name: 'React Armor', costLabel: '800 CR · EATS 1 HIT',
+    color: '#ffaa46',
+    desc: 'Plates bolted to the flanks. Each one detonates outward and cancels a hit whole — damage, shield drain and all.',
   },
 ];
 
@@ -260,6 +286,47 @@ export default function Arsenal() {
               </motion.div>
             </AnimatePresence>
           </div>
+        </div>
+
+        {/* ── Defensive rack ───────────────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-20 mb-10"
+        >
+          <div className="inline-block font-mono text-xs text-teal border border-teal/40 px-4 py-1.5 mb-4 tracking-widest">
+            DEFENSE
+          </div>
+          <h2 className="font-display text-2xl md:text-4xl text-cream tracking-tight uppercase">
+            Defensive Systems
+          </h2>
+          <p className="font-mono text-sm text-muted mt-3">
+            The armory&apos;s other rack — four ways to still be there next turn
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {defences.map((d, i) => (
+            <motion.div
+              key={d.id}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.07 }}
+              className="relative bg-panel border p-5 clip-angled-sm"
+              style={{ borderColor: `${d.color}40` }}
+            >
+              <div className="w-8 h-0.5 mb-4" style={{ background: d.color, boxShadow: `0 0 8px ${d.color}` }} />
+              <h3 className="font-display text-lg text-cream uppercase">{d.name}</h3>
+              <div className="font-mono text-[11px] mt-1" style={{ color: d.color }}>{d.costLabel}</div>
+              <p className="font-mono text-xs text-ink leading-relaxed mt-3">{d.desc}</p>
+              <div
+                className="absolute inset-0 pointer-events-none opacity-20"
+                style={{ background: `radial-gradient(ellipse at 80% 90%, ${d.color}20, transparent 65%)` }}
+              />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
