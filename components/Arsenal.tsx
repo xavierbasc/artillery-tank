@@ -207,8 +207,9 @@ export default function Arsenal() {
           <h2 className="font-display text-2xl md:text-4xl text-cream tracking-tight uppercase">Arsenal</h2>
           <p className="font-mono text-sm text-muted mt-3">All 7 weapons, real numbers — select one to inspect</p>
           <p className="font-mono text-xs text-muted-2 mt-2">
-            In game, each one gets a rotating wireframe model and a dossier
-            typed out live on a green phosphor CRT — scanlines, glow and all
+            In game each one is built as a live wireframe — the MIRV bus
+            separates its warheads, the cluster canister spills its bomblets —
+            beside a dossier typed onto a green phosphor CRT
           </p>
         </motion.div>
 

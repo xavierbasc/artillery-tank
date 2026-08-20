@@ -6,7 +6,7 @@ import { SITE_URL, SITE_NAME } from '@/lib/site';
 
 const TITLE = SITE_NAME;
 const DESCRIPTION =
-  'A turn-based artillery game with destructible pixel-art terrain, inspired by Scorched Earth. Local multiplayer, procedural levels, 100% offline — no servers.';
+  'Blow the ground out from under your rival. Turn-based pixel-art artillery: 8 biomes, 7 warheads, 4 defence systems, 2–6 players on one screen. Free, offline, no accounts.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -37,14 +37,18 @@ export const metadata: Metadata = {
       url: 'og-image.png',
       width: 1200,
       height: 630,
-      alt: 'TerraShell Fracture title screen — a pixel-art tank firing across a desert canyon, with the game logo overhead',
+      type: 'image/png',
+      alt: 'TerraShell Fracture key art — a pixel-art tank firing across a desert canyon under the game logo, with the tagline OFFLINE ARTILLERY WARFARE',
     }],
   },
   twitter: {
     card: 'summary_large_image',
     title: `${TITLE} — Offline Artillery Warfare`,
     description: DESCRIPTION,
-    images: ['og-image.png'],
+    images: [{
+      url: 'og-image.png',
+      alt: 'TerraShell Fracture key art — a pixel-art tank firing across a desert canyon under the game logo',
+    }],
   },
 };
 

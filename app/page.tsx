@@ -12,6 +12,7 @@ import ShareCodes  from '@/components/ShareCodes';
 import Controls    from '@/components/Controls';
 import Specs       from '@/components/Specs';
 import Download    from '@/components/Download';
+import ShareGame   from '@/components/ShareGame';
 import Footer      from '@/components/Footer';
 import { SITE_URL, SITE_NAME } from '@/lib/site';
 
@@ -77,6 +78,7 @@ export default function Home() {
         <Controls />
         <Specs />
         <Download />
+        <ShareGame />
       </main>
       <Footer />
     </>
