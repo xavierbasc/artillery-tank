@@ -1,4 +1,5 @@
 'use client';
+import type React from 'react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Copy, Send, MessageCircle } from 'lucide-react';
@@ -76,8 +77,13 @@ export default function ShareGame() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: i * 0.06 }}
                 whileHover={{ y: -3 }}
-                className="flex items-center gap-2 px-5 py-3 bg-panel border clip-angled-sm font-mono text-sm text-cream"
-                style={{ borderColor: `${t.color}55` }}
+                // cut-sm y no clip-angled-sm + border: `clip-path` recorta la
+                // caja pero no traza su propia diagonal, así que el borde se
+                // perdía justo en las dos esquinas cortadas. Es el mismo
+                // mecanismo que usa el botón de descarga: el fondo del
+                // elemento hace de borde y un pseudo-elemento pone el relleno.
+                className="cut-sm [--cut-fill:var(--panel)] [--cut-edge:var(--brand-soft)] hover:[--cut-edge:var(--brand)] inline-flex items-center gap-2 px-5 py-3 font-mono text-sm text-cream no-underline transition-colors duration-200"
+                style={{ '--brand': t.color, '--brand-soft': `${t.color}55` } as React.CSSProperties}
               >
                 {Icon
                   ? <Icon size={16} style={{ color: t.color }} />
@@ -94,7 +100,7 @@ export default function ShareGame() {
             viewport={{ once: true }}
             transition={{ duration: 0.35, delay: 0.18 }}
             whileHover={{ y: -3 }}
-            className="flex items-center gap-2 px-5 py-3 bg-panel border border-amber/50 clip-angled-sm font-mono text-sm text-amber-2"
+            className="cut-sm [--cut-fill:var(--panel)] [--cut-edge:var(--amber-dim)] hover:[--cut-edge:var(--amber-2)] inline-flex items-center gap-2 px-5 py-3 font-mono text-sm text-amber-2 transition-colors duration-200"
           >
             {copied ? <Check size={16} /> : <Copy size={16} />}
             {copied ? 'Link copied' : 'Copy link'}
