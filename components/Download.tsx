@@ -22,13 +22,13 @@ const DEB_NOTE =
   'Install with "sudo apt install ./TerraShellFracture-Linux-amd64.deb". It drops the game in /opt, puts a terrashell-fracture launcher on PATH and adds a desktop entry. Built against Debian 12, so it also runs on newer Ubuntu and derivatives.';
 
 const IOS_NOTE =
-  'iOS can only install apps through the App Store or TestFlight — a downloadable build isn’t something Apple allows a website to hand out. The iPhone build is finished and signed; it ships as soon as the listing clears review.';
+  'Out now on the App Store for iPhone and iPad. A downloadable build isn’t something Apple allows a website to hand out — iOS installs through the App Store or TestFlight and nowhere else. One purchase covers the Mac version too.';
 
 const MACOS_NOTE =
-  'The macOS build is finished and signed; it arrives on the Mac App Store as soon as the listing clears review.';
+  'Out now on the Mac App Store, universal for Apple Silicon and Intel. It shares a listing with the iPhone build, so a single purchase covers both.';
 
 const ANDROID_NOTE =
-  'The Android build is finished and signed; it arrives on Google Play as soon as the listing clears review.';
+  'Signed APK, straight from this page — Android allows it where iOS does not. You will need to let your browser or file manager install from an unknown source the first time. The Google Play listing is on its way.';
 
 const TARBALL_NOTE =
   'For distros that don’t use .deb: unpack anywhere and run ./TerraShellFracture from inside the folder — it reads its music from the assets/ directory next to the binary.';
@@ -64,13 +64,18 @@ function Card({ entry }: { entry: DownloadEntry }) {
         {entry.store && (
           <div className="flex items-center gap-2 font-mono text-[11px] tracking-widest text-amber-2 uppercase">
             <Store size={13} className="flex-shrink-0" />
-            <span>Coming soon · {entry.store}</span>
+            {/* Una ficha publicada se enlaza; una que aún no existe se anuncia.
+                Prometer "próximamente" sobre algo que ya está a la venta manda
+                a la gente a buscarlo a mano. */}
+            <span>{entry.storeUrl ? `On the ${entry.store}` : `Coming soon · ${entry.store}`}</span>
           </div>
         )}
 
         <div className="flex items-center justify-between gap-3 mt-auto">
           <span className="font-mono text-xs text-muted-2 tracking-wide">
-            {entry.available ? entry.sizeLabel : entry.store ? 'Store release' : '—'}
+            {entry.available ? entry.sizeLabel
+              : entry.storeUrl ? 'On sale'
+              : entry.store ? 'Store release' : '—'}
           </span>
           {/* A build that isn't in public/downloads/ yet must not ship a live
               link — that would be a 404 on the one button people came for. */}
@@ -83,6 +88,17 @@ function Card({ entry }: { entry: DownloadEntry }) {
             >
               <DownloadIcon size={14} />
               {'.' + entry.filename.split('.').slice(1).join('.').toUpperCase()}
+            </a>
+          ) : entry.storeUrl ? (
+            <a
+              href={entry.storeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Get TerraShell Fracture on the ${entry.store}`}
+              className="cut-sm [--cut-edge:var(--amber-2)] [--cut-fill:var(--amber-2)] hover:[--cut-edge:var(--cream)] hover:[--cut-fill:var(--cream)] inline-flex items-center gap-2 font-mono text-xs font-bold text-bg px-4 py-2 transition-colors duration-200 no-underline"
+            >
+              <Store size={14} />
+              GET IT
             </a>
           ) : (
             <span
@@ -124,11 +140,11 @@ export default function Download() {
             Download TerraShell Fracture
           </h2>
           <p className="font-mono text-sm text-muted max-w-xl mx-auto leading-relaxed">
-            Windows and Linux install straight from here. The macOS, Android and
-            iOS builds are finished and signed, and ship through their own
-            stores — Windows lands on the Microsoft Store too. Everything runs
-            fully offline once it&apos;s on your machine, exactly like the rest
-            of the game.
+            Windows, Linux and Android install straight from here. iPhone, iPad
+            and Mac come from the App Store, on one listing — a single purchase
+            covers all three. Windows is headed for the Microsoft Store too.
+            Everything runs fully offline once it&apos;s on your machine,
+            exactly like the rest of the game.
           </p>
         </div>
 
