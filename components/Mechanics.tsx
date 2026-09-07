@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Zap, Layers, Music, CloudLightning, ShoppingCart, Shield, Wrench } from 'lucide-react';
+import { Zap, Layers, Music, CloudLightning, ShoppingCart, Shield, Wrench, Crosshair } from 'lucide-react';
 
 const cards = [
   {
@@ -51,6 +51,13 @@ const cards = [
     title: 'Shields & Defence Rack',
     desc: 'The energy dome is a 72-point arc clipped to the ground, shifting cyan → orange → red as it degrades. Shield cells raise its 40 HP up to 200; an aegis dome widens it and bleeds 20% off every hit; a mag field throws incoming shells back out before they land; reactive plates detonate outward and cancel a hit whole. Whichever system you engage takes the next hit first.',
     accent: '#2ea89a',
+    span: 'col-span-1',
+  },
+  {
+    icon: Crosshair,
+    title: 'Bots That Range In',
+    desc: 'Enemy tanks walk their fire onto you. Each bot watches where its own shell landed and corrects the next shot from the miss — the artillery bracket — so a ridge or a cliff between you buys a turn or two, not the whole match. They also visit the armory: shield cells and reactive plates first, then ordnance that escalates with the level, up to a nuke deep into a run. Low skill barely learns and never touches the heavy stuff; high skill brackets in fast and saves the expensive shell for once it has your range.',
+    accent: '#e0553c',
     span: 'col-span-1',
   },
 ];
