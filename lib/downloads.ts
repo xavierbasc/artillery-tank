@@ -40,6 +40,14 @@ type CatalogEntry = Pick<DownloadEntry, 'id' | 'platform' | 'filename' | 'requir
 const CATALOG: CatalogEntry[] = [
   { id: 'windows', platform: 'Windows', filename: 'TerraShellFracture-Windows-Setup.exe',  requirement: 'Windows 10/11 · 64-bit · installer',
     store: 'Microsoft Store', storeUrl: null, webDownload: true },
+  // Mismo build que el instalador, empaquetado en MSIX — el formato que pide
+  // la Microsoft Store. Va sin firmar, y eso NO es un descuido: makemsix (la
+  // versión multiplataforma) sólo empaqueta, y firmar necesita signtool y un
+  // certificado, los dos en Windows. Windows exige firma para instalar un
+  // MSIX, así que este fichero es para quien lo firme él; la descarga que
+  // funciona sin más sigue siendo el instalador de arriba.
+  { id: 'windowsmsix', platform: 'Windows (MSIX)', filename: 'TerraShellFracture-Windows.msix', requirement: 'Windows 10 1809+ · 64-bit · unsigned package',
+    store: null, storeUrl: null, webDownload: true },
   { id: 'linux',   platform: 'Linux',   filename: 'TerraShellFracture-Linux-amd64.deb',    requirement: 'Debian/Ubuntu · x86-64 · .deb package',
     store: null, storeUrl: null, webDownload: true },
   { id: 'linuxtar',platform: 'Linux (portable)', filename: 'TerraShellFracture-Linux.tar.gz', requirement: 'Any distro · x86-64 · unpack and run',

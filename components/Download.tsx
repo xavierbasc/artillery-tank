@@ -1,4 +1,4 @@
-import { Apple, AppWindow, Terminal, Smartphone, Store, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
+import { Apple, AppWindow, Terminal, Smartphone, Store, Package, Download as DownloadIcon, TriangleAlert, MousePointerClick, Lock } from 'lucide-react';
 import { asset } from '@/lib/asset';
 import { getDownloads, type DownloadEntry } from '@/lib/downloads';
 
@@ -10,6 +10,7 @@ const ICONS: Record<string, typeof Apple> = {
   macos: Apple,
   ios: Smartphone,
   windows: AppWindow,
+  windowsmsix: Package,
   linux: Terminal,
   linuxtar: Terminal,
   android: Smartphone,
@@ -27,6 +28,9 @@ const IOS_NOTE =
 const MACOS_NOTE =
   'Out now on the Mac App Store, universal for Apple Silicon and Intel. It shares a listing with the iPhone build, so a single purchase covers both.';
 
+const MSIX_NOTE =
+  'The same build in MSIX, the format the Microsoft Store uses. It ships unsigned, and Windows will not install an unsigned MSIX — you would have to sign it yourself with your own certificate. For a normal install use the installer above, or wait for the Microsoft Store listing, which Microsoft signs for you.';
+
 const ANDROID_NOTE =
   'Signed APK, straight from this page — Android allows it where iOS does not. You will need to let your browser or file manager install from an unknown source the first time. The Google Play listing is on its way.';
 
@@ -38,6 +42,7 @@ function Card({ entry }: { entry: DownloadEntry }) {
   const warning =
     entry.id === 'macos'    ? MACOS_NOTE       :
     entry.id === 'windows'  ? SMARTSCREEN_NOTE :
+    entry.id === 'windowsmsix' ? MSIX_NOTE      :
     entry.id === 'linux'    ? DEB_NOTE         :
     entry.id === 'linuxtar' ? TARBALL_NOTE     :
     entry.id === 'android'  ? ANDROID_NOTE     :
@@ -140,11 +145,12 @@ export default function Download() {
             Download TerraShell Fracture
           </h2>
           <p className="font-mono text-sm text-muted max-w-xl mx-auto leading-relaxed">
-            Windows, Linux and Android install straight from here. iPhone, iPad
-            and Mac come from the App Store, on one listing — a single purchase
-            covers all three. Windows is headed for the Microsoft Store too.
-            Everything runs fully offline once it&apos;s on your machine,
-            exactly like the rest of the game.
+            Windows, Linux and Android install straight from here, with the
+            Windows build also packaged as MSIX. iPhone, iPad and Mac come from
+            the App Store, on one listing — a single purchase covers all three.
+            Windows is headed for the Microsoft Store too. Everything runs
+            fully offline once it&apos;s on your machine, exactly like the rest
+            of the game.
           </p>
         </div>
 
