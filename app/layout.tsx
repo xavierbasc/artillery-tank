@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     'artillery game', 'turn-based artillery', 'turn-based strategy game',
     'destructible terrain', 'pixel art game', 'offline game', 'no wifi game',
     'Scorched Earth game', 'local multiplayer game', 'indie game',
-    'SDL3', 'C++ game', 'tank game', 'procedural generation',
+    'C++ game', 'tank game', 'procedural generation',
   ],
   authors: [{ name: 'Javier Bascones Velázquez' }],
   creator: 'Javier Bascones Velázquez',

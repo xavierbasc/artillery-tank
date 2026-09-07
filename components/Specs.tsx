@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 // Every value here traces to a real constant or system in the codebase —
 // see src/Core/Constants.h, src/World/Scenery.h, src/Core/Game.h.
 const specs = [
-  { label: 'language',   value: 'C++20',                note: 'smart pointers · RAII · constexpr' },
-  { label: 'engine',     value: 'SDL3',                  note: 'windowing · accelerated renderer · AudioStream' },
+  { label: 'language',   value: 'C++',                   note: 'smart pointers · RAII · constexpr' },
+  { label: 'engine',     value: 'custom',                note: 'windowing · accelerated renderer · streaming audio' },
   { label: 'resolution', value: '640x360 logical',       note: 'integer scale, pixel-perfect on any display' },
   { label: 'timestep',   value: '60hz fixed',            note: 'accumulator + 250ms guard, deterministic physics' },
   { label: 'audio',      value: 'synth + MOD',           note: 'square/noise SFX generated live, libxmp tracker music' },

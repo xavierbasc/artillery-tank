@@ -11,7 +11,7 @@ export default function Footer() {
           </div>
           <div className="font-mono text-xs text-amber-2 tracking-[0.3em]">FRACTURE</div>
           <div className="font-mono text-xs text-muted mt-2">
-            Turn-based artillery, built with SDL3 and C++20. No servers, no accounts, no telemetry.
+            Turn-based artillery, built with C++. No servers, no accounts, no telemetry.
           </div>
         </div>
 

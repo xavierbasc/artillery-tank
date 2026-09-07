@@ -77,8 +77,8 @@ export default function Privacy() {
               It requests no permissions — no camera, microphone, location,
               contacts, photos or Bluetooth. The camera, microphone and
               Bluetooth usage strings you may see listed on the App Store are
-              required by Apple because the SDL framework the game is built on
-              links those system libraries; the game never calls them.
+              required by Apple because the cross-platform framework the game is
+              built on links those system libraries; the game never calls them.
             </p>
           </Card>
 

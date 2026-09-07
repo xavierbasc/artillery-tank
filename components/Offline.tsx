@@ -5,7 +5,7 @@ import { WifiOff, Database, EyeOff, Package } from 'lucide-react';
 const points = [
   { icon: WifiOff, title: 'No servers', desc: 'There is no networking code anywhere in the codebase — no sockets, no HTTP client, nothing to reach out to. The one outward link is the SHARE button on the main menu, which hands a URL to your browser and nothing else.' },
   { icon: EyeOff, title: 'No accounts, no telemetry', desc: 'Nothing is measured, logged remotely, or phoned home. What happens on your machine stays on your machine.' },
-  { icon: Package, title: 'Self-contained binary', desc: 'SDL3 is linked statically and every image asset is embedded in the executable — the game runs from a single file, no install directory to keep intact.' },
+  { icon: Package, title: 'Self-contained binary', desc: 'Every library it needs is linked statically and every image asset is embedded in the executable — the game runs from a single file, no install directory to keep intact.' },
   { icon: Database, title: 'Audio with no audio files', desc: 'Cannon fire and explosions are synthesised sample-by-sample at run time. The soundtrack is the only audio data on disk — everything else is generated math.' },
 ];
 

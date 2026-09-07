@@ -21,7 +21,7 @@ const cards = [
   {
     icon: Music,
     title: 'Synth + MOD Audio',
-    desc: 'Cannon shots and explosions are synthesised in real time — square-wave sweeps and filtered noise, no .wav files anywhere. Menu and battle each run a MOD tracker soundtrack through libxmp over an SDL3 AudioStream.',
+    desc: 'Cannon shots and explosions are synthesised in real time — square-wave sweeps and filtered noise, no .wav files anywhere. Menu and battle each run a MOD tracker soundtrack through libxmp, mixed live into the audio stream.',
     accent: '#a06fd6',
     span: 'col-span-1',
   },
