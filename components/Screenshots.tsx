@@ -43,7 +43,7 @@ const shots = [
   {
     src: '/shots/howtoplay.png',
     title: 'How To Play',
-    desc: 'Keyboard and mouse mapped out on a labelled diagram',
+    desc: 'Keyboard and mouse on a labelled diagram, plus a field briefing on wind, ground and shields',
     accent: '#c2321f',
     span: 'col-span-1',
   },
@@ -55,10 +55,24 @@ const shots = [
     span: 'col-span-1',
   },
   {
+    src: '/shots/combat.png',
+    title: 'Combat HUD',
+    desc: 'Turn banner, draining turn clock and floating damage for every hit',
+    accent: '#ff5b3d',
+    span: 'col-span-1',
+  },
+  {
     src: '/shots/options.png',
     title: 'Settings',
-    desc: 'Audio and display, on glass panels over the live menu scene',
+    desc: 'Four tabs — audio, video, game and accessibility — each option explained in place',
     accent: '#5fd6c6',
+    span: 'col-span-1',
+  },
+  {
+    src: '/shots/options-access.png',
+    title: 'Accessibility',
+    desc: 'Reduced motion, a colourblind-safe player set and a one-tap reset',
+    accent: '#a06fd6',
     span: 'col-span-1',
   },
   {

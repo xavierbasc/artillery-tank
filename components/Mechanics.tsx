@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Zap, Layers, Music, CloudLightning, ShoppingCart, Shield, Wrench, Crosshair } from 'lucide-react';
+import { Zap, Layers, Music, CloudLightning, ShoppingCart, Shield, Wrench, Crosshair, SlidersHorizontal, Timer } from 'lucide-react';
 
 const cards = [
   {
@@ -58,6 +58,20 @@ const cards = [
     title: 'Bots That Range In',
     desc: 'Enemy tanks walk their fire onto you. Each bot watches where its own shell landed and corrects the next shot from the miss — the artillery bracket — so a ridge or a cliff between you buys a turn or two, not the whole match. They also visit the armory: shield cells and reactive plates first, then ordnance that escalates with the level, up to a nuke deep into a run. Low skill barely learns and never touches the heavy stuff; high skill brackets in fast and saves the expensive shell for once it has your range.',
     accent: '#e0553c',
+    span: 'col-span-1',
+  },
+  {
+    icon: Timer,
+    title: 'Turn Clock & Combat Read',
+    desc: 'Switch on a 15, 30 or 60 second turn clock and the shot leaves the barrel when it runs out, aimed however you left it — a drain bar under the HUD and a countdown that only appears in the last ten seconds. Every hit now writes what it actually cost: hull damage in red, shield in blue, a cancelled hit on a reactive plate in amber. A callsign banner sweeps in on your turn and on every elimination, so a six-tank squad never leaves you hunting for whose move it is.',
+    accent: '#ffb92e',
+    span: 'col-span-1',
+  },
+  {
+    icon: SlidersHorizontal,
+    title: 'Settings That Explain Themselves',
+    desc: 'Four tabs — audio, video, game and accessibility — with the selected option explained in a line at the foot of the panel, so you never have to start a match to find out what a switch does. Master, music and effect levels; CRT scanlines, a soft backdrop and four steps of screen shake; turn clock and aim-guide modes. Accessibility carries reduced motion, which stills the shake, the full-screen flashes and every drifting background layer, and a colourblind-safe player set with no red-green pair in it.',
+    accent: '#5fd6c6',
     span: 'col-span-1',
   },
 ];
