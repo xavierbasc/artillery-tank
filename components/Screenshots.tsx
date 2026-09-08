@@ -62,6 +62,13 @@ const shots = [
     span: 'col-span-1',
   },
   {
+    src: '/shots/lava.png',
+    title: 'Lava Bomb',
+    desc: 'Pyrogel running along the ground, burning the terrain down as it spreads',
+    accent: '#ff6a1e',
+    span: 'col-span-1 md:col-span-2',
+  },
+  {
     src: '/shots/options.png',
     title: 'Settings',
     desc: 'Four tabs — audio, video, game and accessibility — each option explained in place',

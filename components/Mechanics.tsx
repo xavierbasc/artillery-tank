@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Zap, Layers, Music, CloudLightning, ShoppingCart, Shield, Wrench, Crosshair, SlidersHorizontal, Timer } from 'lucide-react';
+import { Zap, Layers, Music, CloudLightning, ShoppingCart, Shield, Wrench, Crosshair, SlidersHorizontal, Timer, Flame, Save } from 'lucide-react';
 
 const cards = [
   {
@@ -65,6 +65,20 @@ const cards = [
     title: 'Turn Clock & Combat Read',
     desc: 'Switch on a 15, 30 or 60 second turn clock and the shot leaves the barrel when it runs out, aimed however you left it — a drain bar under the HUD and a countdown that only appears in the last ten seconds. Every hit now writes what it actually cost: hull damage in red, shield in blue, a cancelled hit on a reactive plate in amber. A callsign banner sweeps in on your turn and on every elimination, so a six-tank squad never leaves you hunting for whose move it is.',
     accent: '#ffb92e',
+    span: 'col-span-1',
+  },
+  {
+    icon: Flame,
+    title: 'Ground That Catches Fire',
+    desc: 'The Lava Bomb is the only shell whose impact is the least of it. The drum splits and pyrogel runs along the surface, taking a column of ground at a time out to 78 px on each side — up slopes, down into gullies, following whatever the heightmap does. Anything standing in the front burns for as long as it stays there, the fire eats the terrain down as it passes, and what it leaves behind is embers still glowing in the soil long after the flames have gone. A shot that falls short can still finish the job.',
+    accent: '#ff6a1e',
+    span: 'col-span-1',
+  },
+  {
+    icon: Save,
+    title: 'Stop Mid-Run, Pick It Up Later',
+    desc: 'Pause and save between shots and the run waits for you: the level, the round, whose turn it is, every crater already carved into the terrain and every shell and defence system still in each tank. CONTINUE appears on the main menu when there is something to come back to. The save is a continuation point, not a rewind — loading it consumes it, so a run you walk away from is still a run you can lose.',
+    accent: '#8fb4d6',
     span: 'col-span-1',
   },
   {

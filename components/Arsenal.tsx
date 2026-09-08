@@ -136,6 +136,33 @@ const weapons = [
       </div>
     ),
   },
+  {
+    id: 'lava_bomb', name: 'Lava Bomb', cost: 1300, costLabel: '1,300 CR · \u00d72 BUNDLE', costColor: '#ff6a1e',
+    dmg: 25, rad: 18, bundle: 2, clusters: 0, pen: false, barColor: '#ff6a1e',
+    badge: 'BURNS THE GROUND',
+    desc: 'The impact is the weakest part. The drum splits and pyrogel runs downhill, setting the ground alight for 78 px either side — it eats terrain as it goes and leaves it burning. A near miss still kills.',
+    art: (
+      <div className="relative w-24 h-20 flex items-end justify-center">
+        <div className="absolute bottom-5 w-10 h-12 rounded-md" style={{ background: 'linear-gradient(to right,#8a4418,#c87030,#8a4418)', filter: 'drop-shadow(0 0 8px #ff6a1e88)' }} />
+        <div className="absolute bottom-14 w-6 h-2 rounded-sm" style={{ background: 'linear-gradient(to right,#ffb040,#ff6a1e)' }} />
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <motion.div
+            key={i}
+            className="absolute bottom-0 rounded-full"
+            style={{
+              left: `${12 + i * 14}%`,
+              width: 8 - (i % 3),
+              height: 8 - (i % 3),
+              background: i % 2 ? '#ffb03c' : '#ff5a14',
+            }}
+            animate={{ opacity: [0.25, 1, 0.25], y: [0, -7 - i, 0] }}
+            transition={{ duration: 1.1 + i * 0.13, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        ))}
+        <div className="absolute bottom-0 w-20 h-1.5 rounded-full" style={{ background: 'linear-gradient(to right,transparent,#ff6a1e,transparent)' }} />
+      </div>
+    ),
+  },
 ];
 
 // Real values — src/Core/Constants.h `DEFENSES[]`. The armory's right-hand
@@ -205,7 +232,7 @@ export default function Arsenal() {
             ORDNANCE
           </div>
           <h2 className="font-display text-2xl md:text-4xl text-cream tracking-tight uppercase">Arsenal</h2>
-          <p className="font-mono text-sm text-muted mt-3">All 7 weapons, real numbers — select one to inspect</p>
+          <p className="font-mono text-sm text-muted mt-3">All 8 weapons, real numbers — select one to inspect</p>
           <p className="font-mono text-xs text-muted-2 mt-2">
             In game each one is built as a live wireframe — the MIRV bus
             separates its warheads, the cluster canister spills its bomblets —
