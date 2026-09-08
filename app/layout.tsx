@@ -6,7 +6,7 @@ import { SITE_URL, SITE_NAME } from '@/lib/site';
 
 const TITLE = SITE_NAME;
 const DESCRIPTION =
-  'Blow the ground out from under your rival. Turn-based pixel-art artillery: 8 biomes, 7 warheads, 4 defence systems, 2–6 players on one screen. Free, offline, no accounts.';
+  'Blow the ground out from under your rival. Turn-based pixel-art artillery: 8 biomes, 8 warheads, 4 defence systems, 2–6 players on one screen. Free, offline, no accounts.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

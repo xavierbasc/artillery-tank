@@ -11,7 +11,7 @@ const keyboardControls = [
   { key: 'D',      action: 'Cycle the engaged defence system' },
   { key: 'S',      action: 'Share the game (main menu)' },
   { key: 'Enter',  action: 'Confirm / buy in shop' },
-  { key: 'Esc',    action: 'Pause / close shop' },
+  { key: 'Esc',    action: 'Pause / close shop — the pause menu is where you save and exit' },
 ];
 
 const mouseControls = [
