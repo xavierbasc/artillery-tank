@@ -110,6 +110,13 @@ const shots = [
     accent: '#5fd6c6',
     span: 'col-span-1',
   },
+  {
+    src: '/shots/credits-outro.png',
+    title: 'Sign-Off',
+    desc: 'The roll coasts to a stop and light beams sweep in from the vanishing point',
+    accent: '#9fb6e8',
+    span: 'col-span-1',
+  },
 ];
 
 const container = {

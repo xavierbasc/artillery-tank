@@ -42,6 +42,8 @@ const skies: Shot[] = [
     desc: 'Starfield, a ringed planet, and very little else to see by',  accent: '#8a7ae0' },
   { src: '/shots/sky-overcast.png', name: 'Overcast',     tag: 'OVERCAST',
     desc: 'Heavy cloud over ruins — the game’s default gloom',      accent: '#8a8f9a' },
+  { src: '/shots/sky-snow.png',     name: 'Snowfall',     tag: 'SNOW',
+    desc: 'Flakes in three depths — the nearest drift past in front of the tanks', accent: '#dce8f5' },
 ];
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } };
